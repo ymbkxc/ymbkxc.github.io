@@ -324,6 +324,203 @@
 
 
   
+    <article id="post-2019-12-19-LSTM知识点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/2019-12-19-LSTM%E7%9F%A5%E8%AF%86%E7%82%B9/">LSTM知识点</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/19/2019-12-19-LSTM%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2019-12-19T06:58:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>embedding 索引句子中的词在第几行，对用生产数据来说，没有词的概念，并不能索引第几行，会出现数组维度溢出的异常，直接参考静态embedding，将数据当做事先训练好的词向量。 </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">deeplearning</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LSTM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/2019-12-19-LSTM%E7%9F%A5%E8%AF%86%E7%82%B9/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2019-12-19-LSTM理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/2019-12-19-LSTM%E7%90%86%E8%A7%A3/">LSTM理解</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/19/2019-12-19-LSTM%E7%90%86%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2019-12-19T06:58:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>$$<br>\begin{array}{ll} \<br>            i_t = \sigma(W_{ii} x_t + b_{ii} + W_{hi} h_{(t-1)} + b_{hi}) \<br>            f_t = \sigma(W_{if} x_t + b_{if} + W_{hf} h_{(t-1)} + b_{hf}) \<br>            g_t = \tanh(W_{ig} x_t + b_{ig} + W_{hg} h_{(t-1)} + b_{hg}) \<br>            o_t = \sigma(W_{io} x_t + b_{io} + W_{ho} h_{(t-1)} + b_{ho}) \<br>            c_t = f_t c_{(t-1)} + i_t g_t \<br>            h_t = o_t \tanh(c_t) \<br>        \end{array}<br>$$</p>
+<p>###LSTM 参数维度：</p>
+<p>#####Inputs: input, (h_0, c_0)</p>
+<ul>
+<li><p><strong>input</strong>  of  shape <code>(seq_len, batch, input_size)</code>对应到工业数据（时间步，批大小，特征数）tensor containing the features  of the input sequence.</p>
+</li>
+<li><p><strong>h_0</strong>  shape <code>(num_layers * num_directions, batch, hidden_size)</code> tensor  containing the initial hidden state for each element in the batch.</p>
+</li>
+<li><p><strong>c_0</strong> of shape <code>(num_layers * num_directions, batch, hidden_size)</code>: tensor containing the initial cell state for each element in the batch.</p>
+</li>
+</ul>
+<p>#####Outputs: output, (h_n, c_n)</p>
+<pre><code>- **output** of shape `(seq_len, batch, num_directions * hidden_size)`: tensor
+  containing the output features `(h_t)` from the last layer of the LSTM,
+
+- **h_n** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+  containing the hidden state for `t = seq_len`. Like *output*, the layers can be separated using ``h_n.view(num_layers, num_directions, batch, hidden_size)`` and similarly for *c_n*.
+
+- **c_n** (num_layers * num_directions, batch, hidden_size): tensor containing the cell state for `t = seq_len`</code></pre><p>###Attributes:</p>
+<p>​    weight_ih_l[k] : the learnable input-hidden weights of the :math$\text{k}^{th}$ layer<br>        $(W_ii|W_if|W_ig|W_io)$, of shape <code>(4*hidden_size x input_size)</code><br>    weight_hh_l[k] : the learnable hidden-hidden weights of the :math:$\text{k}^{th}$ layer<br>        $(W_hi|W_hf|W_hg|W_ho)$, of shape <code>(4*hidden_size x hidden_size)</code><br>    bias_ih_l[k] : the learnable input-hidden bias of the :math:$\text{k}^{th}$ layer<br>        $(b_ii|b_if|b_ig|b_io)$, of shape <code>(4*hidden_size)</code><br>    bias_hh_l[k] : the learnable hidden-hidden bias of the :math:$\text{k}^{th}$ layer<br>        $(b_hi|b_hf|b_hg|b_ho)$, of shape <code>(4*hidden_size)</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">deeplearning</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LSTM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/2019-12-19-LSTM%E7%90%86%E8%A7%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
@@ -422,6 +619,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">deeplearning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
             
             <div class="clearfix"></div>

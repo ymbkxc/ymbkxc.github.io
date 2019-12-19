@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: pytorch | 六时吉祥</title>
+  <title>LSTM理解 | 六时吉祥</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想到即做">
-<meta property="og:type" content="website">
-<meta property="og:title" content="六时吉祥">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;pytorch&#x2F;index.html">
+  <meta name="description" content="$$\begin{array}{ll} \            i_t &#x3D; \sigma(W_{ii} x_t + b_{ii} + W_{hi} h_{(t-1)} + b_{hi}) \            f_t &#x3D; \sigma(W_{if} x_t + b_{if} + W_{hf} h_{(t-1)} + b_{hf}) \            g_t &#x3D; \tanh(W_{ig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LSTM理解">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;2019-12-19-LSTM%E7%90%86%E8%A7%A3&#x2F;index.html">
 <meta property="og:site_name" content="六时吉祥">
-<meta property="og:description" content="想到即做">
+<meta property="og:description" content="$$\begin{array}{ll} \            i_t &#x3D; \sigma(W_{ii} x_t + b_{ii} + W_{hi} h_{(t-1)} + b_{hi}) \            f_t &#x3D; \sigma(W_{if} x_t + b_{if} + W_{hf} h_{(t-1)} + b_{hf}) \            g_t &#x3D; \tanh(W_{ig">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-19T06:58:13.000Z">
+<meta property="article:modified_time" content="2019-12-19T07:51:32.477Z">
 <meta property="article:author" content="六时吉祥">
+<meta property="article:tag" content="deeplearning">
+<meta property="article:tag" content="LSTM">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="六时吉祥" type="application/atom+xml">
@@ -156,52 +160,91 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2019-12-19-LSTM理解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/19/2019-12-19-pytorch%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2019-12-19T06:58:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/19/2019-12-19-pytorch%E7%9F%A5%E8%AF%86%E7%82%B9/">Pytorch知识点</a>
+    <h1 class="article-title" itemprop="name">
+      LSTM理解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/12/19/2019-12-19-LSTM%E7%90%86%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2019-12-19T06:58:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>$$<br>\begin{array}{ll} \<br>            i_t = \sigma(W_{ii} x_t + b_{ii} + W_{hi} h_{(t-1)} + b_{hi}) \<br>            f_t = \sigma(W_{if} x_t + b_{if} + W_{hf} h_{(t-1)} + b_{hf}) \<br>            g_t = \tanh(W_{ig} x_t + b_{ig} + W_{hg} h_{(t-1)} + b_{hg}) \<br>            o_t = \sigma(W_{io} x_t + b_{io} + W_{ho} h_{(t-1)} + b_{ho}) \<br>            c_t = f_t c_{(t-1)} + i_t g_t \<br>            h_t = o_t \tanh(c_t) \<br>        \end{array}<br>$$</p>
+<p>###LSTM 参数维度：</p>
+<p>#####Inputs: input, (h_0, c_0)</p>
+<ul>
+<li><p><strong>input</strong>  of  shape <code>(seq_len, batch, input_size)</code>对应到工业数据（时间步，批大小，特征数）tensor containing the features  of the input sequence.</p>
+</li>
+<li><p><strong>h_0</strong>  shape <code>(num_layers * num_directions, batch, hidden_size)</code> tensor  containing the initial hidden state for each element in the batch.</p>
+</li>
+<li><p><strong>c_0</strong> of shape <code>(num_layers * num_directions, batch, hidden_size)</code>: tensor containing the initial cell state for each element in the batch.</p>
+</li>
+</ul>
+<p>#####Outputs: output, (h_n, c_n)</p>
+<pre><code>- **output** of shape `(seq_len, batch, num_directions * hidden_size)`: tensor
+  containing the output features `(h_t)` from the last layer of the LSTM,
+
+- **h_n** of shape `(num_layers * num_directions, batch, hidden_size)`: tensor
+  containing the hidden state for `t = seq_len`. Like *output*, the layers can be separated using ``h_n.view(num_layers, num_directions, batch, hidden_size)`` and similarly for *c_n*.
+
+- **c_n** (num_layers * num_directions, batch, hidden_size): tensor containing the cell state for `t = seq_len`</code></pre><p>###Attributes:</p>
+<p>​    weight_ih_l[k] : the learnable input-hidden weights of the :math$\text{k}^{th}$ layer<br>        $(W_ii|W_if|W_ig|W_io)$, of shape <code>(4*hidden_size x input_size)</code><br>    weight_hh_l[k] : the learnable hidden-hidden weights of the :math:$\text{k}^{th}$ layer<br>        $(W_hi|W_hf|W_hg|W_ho)$, of shape <code>(4*hidden_size x hidden_size)</code><br>    bias_ih_l[k] : the learnable input-hidden bias of the :math:$\text{k}^{th}$ layer<br>        $(b_ii|b_if|b_ig|b_io)$, of shape <code>(4*hidden_size)</code><br>    bias_hh_l[k] : the learnable hidden-hidden bias of the :math:$\text{k}^{th}$ layer<br>        $(b_hi|b_hf|b_hg|b_ho)$, of shape <code>(4*hidden_size)</code></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">pytorch</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">deeplearning</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">deeplearning</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LSTM</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -214,17 +257,108 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/2019-12-19-LSTM%E7%90%86%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/12/19/2019-12-19-LSTM%E7%9F%A5%E8%AF%86%E7%82%B9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          LSTM知识点
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -247,9 +381,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
