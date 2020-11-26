@@ -28,7 +28,7 @@
 <meta property="og:description" content="统计某列元素中值的个数： 12dict(biaoqian[&amp;#x27;发现角裂支数合计&amp;#x27;].value_counts())     获取单列： 1condata.loc[:,&amp;#x27;发现角裂支数合计&amp;#x27;]  根据dataframe中某一列进行判断 并根据判断结果赋值到另一列 1condata[&amp;#x27;标签&amp;#x27;] &#x3D; condata.发现角裂支数合计.apply(l">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-14T08:13:32.000Z">
-<meta property="article:modified_time" content="2020-09-14T08:14:32.670Z">
+<meta property="article:modified_time" content="2020-11-26T02:12:34.444Z">
 <meta property="article:author" content="六时吉祥">
 <meta name="twitter:card" content="summary">
 
@@ -182,10 +182,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-09-14 16:13:32 / Modified: 16:14:32" itemprop="dateCreated datePublished" datetime="2020-09-14T16:13:32+08:00">2020-09-14</time>
+              <time title="Created: 2020-09-14 16:13:32" itemprop="dateCreated datePublished" datetime="2020-09-14T16:13:32+08:00">2020-09-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-26 10:12:34" itemprop="dateModified" datetime="2020-11-26T10:12:34+08:00">2020-11-26</time>
+              </span>
 
           
 
@@ -232,7 +238,26 @@
 <p><strong>dataframe 查看各个列变量类型</strong></p>
 <p>df.dtypes</p>
 <p><strong>python 获取SQL server中文乱码解决</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="keyword">nvarchar</span>(<span class="number">100</span>),字段)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="keyword">nvarchar</span>(<span class="number">100</span>),字段)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>dataframe转list</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X.values.tolist()*<span class="comment">#dataframe 转 list*</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>dataframe的时间戳转成字符串时间格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">format = <span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span> <span class="comment"># 根据此格式来时间戳解析为时间字符串</span></span><br><span class="line">data[<span class="string">&#x27;time_stamp&#x27;</span>].apply(<span class="keyword">lambda</span> x: datetime.datetime.fromtimestamp(x).strftime(format))</span><br><span class="line">data.reset_index(drop=<span class="literal">True</span>).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>dataframe多重索引降级</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.index = df.index.droplevel()<span class="comment"># 多重索引降级</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>打开大文本文件</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">&#x27;D:/学习/data/.txt&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    search = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">while</span> search:</span><br><span class="line">        next_n_lines=list(islice(f,<span class="number">100000</span>))</span><br><span class="line">        <span class="keyword">for</span> eachinfor <span class="keyword">in</span> next_n_lines:       </span><br><span class="line">            <span class="keyword">if</span> str(eachinfor).find(<span class="string">&#x27;&#x27;</span>)!=<span class="number">-1</span>:</span><br><span class="line">                print(eachinfor)</span><br><span class="line">                search = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> next_n_lines:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>dataframe去除索引、重新命名列名、重新组织列</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df = df.reset_index()</span><br><span class="line">df = df.rename(&#123;<span class="string">&#x27;code&#x27;</span>: <span class="string">&#x27;symbol&#x27;</span>,<span class="string">&#x27;date&#x27;</span>: <span class="string">&#x27;dt&#x27;</span>, <span class="string">&#x27;volume&#x27;</span>: <span class="string">&#x27;vol&#x27;</span>&#125;, axis=<span class="number">1</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">df = df[[<span class="string">&#x27;symbol&#x27;</span>, <span class="string">&#x27;dt&#x27;</span>, <span class="string">&#x27;open&#x27;</span>, <span class="string">&#x27;close&#x27;</span>, <span class="string">&#x27;high&#x27;</span>, <span class="string">&#x27;low&#x27;</span>, <span class="string">&#x27;vol&#x27;</span>]]</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -248,8 +273,8 @@
     <div class="post-nav">
       <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/09/14/Csharp%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97/" rel="next" title="Csharp应用">
-      Csharp应用 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/09/14/SQL%E5%BA%94%E7%94%A8/" rel="next" title="SQL应用">
+      SQL应用 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
