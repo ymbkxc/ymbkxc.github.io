@@ -157,6 +157,68 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/%E9%87%8F%E5%8C%96%E4%B9%8Bqlib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/08/%E9%87%8F%E5%8C%96%E4%B9%8Bqlib/" class="post-title-link" itemprop="url">量化之qlib</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-08 17:15:52 / Modified: 17:32:28" itemprop="dateCreated datePublished" datetime="2021-01-08T17:15:52+08:00">2021-01-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="量化之qlib"><a href="#量化之qlib" class="headerlink" title="量化之qlib"></a>量化之qlib</h1><p>通过git进行安装，报错 ：“openssl/opensslv.h”: No such file or directory  安装 pyopenssl。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/microsoft/qlib.git </span><br><span class="line">cd qlib</span><br><span class="line">python setup.py install --user</span><br></pre></td></tr></table></figure>
+
+<p>准备数据：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python scripts/get_data.py qlib_data --target_dir ~/.qlib/qlib_data/cn_data --region cn</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/%E6%AF%8F%E6%97%A5%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -180,10 +242,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-01-05 15:08:19 / Modified: 16:09:43" itemprop="dateCreated datePublished" datetime="2021-01-05T15:08:19+08:00">2021-01-05</time>
+              <time title="Created: 2021-01-05 15:08:19" itemprop="dateCreated datePublished" datetime="2021-01-05T15:08:19+08:00">2021-01-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-07 08:36:16" itemprop="dateModified" datetime="2021-01-07T08:36:16+08:00">2021-01-07</time>
+              </span>
 
           
 
@@ -203,7 +271,8 @@
 <th>股票名称</th>
 <th>操作</th>
 <th>成本</th>
-<th>现价</th>
+<th>收盘价</th>
+<th>卖出价</th>
 <th>仓位</th>
 <th>收益</th>
 <th>总收益</th>
@@ -215,6 +284,7 @@
 <td>买入</td>
 <td>10.585</td>
 <td></td>
+<td></td>
 <td>0.5</td>
 <td></td>
 <td></td>
@@ -225,12 +295,58 @@
 <td>买入</td>
 <td>6.934</td>
 <td></td>
+<td></td>
 <td>0.5</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
+<td align="left">2021年1月6日</td>
+<td>中兵红箭</td>
+<td>卖出</td>
+<td>10.585</td>
+<td></td>
+<td>10.600</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">2021年1月6日</td>
+<td>深康佳A</td>
+<td>持有</td>
+<td>6.934</td>
+<td>6.71</td>
+<td></td>
+<td>0.5</td>
+<td>-2.077%</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">2021年1月6日</td>
+<td>500ETF</td>
+<td>买入</td>
+<td>7.227</td>
+<td>7.218</td>
+<td></td>
+<td>0.5</td>
+<td>-0.125%</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">2021年1月6日</td>
+<td>新能车ETF</td>
+<td>买入</td>
+<td>2.240</td>
+<td>2.245</td>
+<td></td>
+<td>1</td>
+<td>0.22%</td>
+<td>-1.982%</td>
+</tr>
+<tr>
 <td align="left"></td>
+<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -242,45 +358,6 @@
 <tr>
 <td align="left"></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td align="left"></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td align="left"></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td align="left"></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td align="left"></td>
 <td></td>
 <td></td>
 <td></td>
@@ -753,7 +830,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-05 13:34:50" itemprop="dateModified" datetime="2021-01-05T13:34:50+08:00">2021-01-05</time>
+                <time title="Modified: 2021-01-08 13:06:35" itemprop="dateModified" datetime="2021-01-08T13:06:35+08:00">2021-01-08</time>
               </span>
 
           
@@ -777,6 +854,14 @@
 <p>群内风总提示：要做交易系统，样本要大于<strong>五百</strong>，回顾性分析论文至少看<strong>200</strong>篇。</p>
 <p><strong>房价</strong> 根据群内讨论，上海建设租赁房的数量不断增多（关注上海租赁房市场），现在人民币放开直接投资，不用绕道香港，因此上海为海外资金停泊地，上海房子还是要拉高涨的。</p>
 <p><strong>低概率事件</strong>：==比特币==作为国际间==美元流动性==指标，经常是早于美股的，最近似乎又是如此，多验证几次再确认。 </p>
+<h1 id="2021-01-06"><a href="#2021-01-06" class="headerlink" title="2021/01/06"></a>2021/01/06</h1><p>根据金融数据判断庄家动作，根据新闻印证。</p>
+<h1 id="2021-01-07"><a href="#2021-01-07" class="headerlink" title="2021/01/07"></a>2021/01/07</h1><p>昨日买入新能车ETF和500ETF。操作原因：有跌幅，可能涨。</p>
+<p>固定资产抵抗通胀，要思考。</p>
+<p>如果不玩盘子特别大的票的话，在今年有什么变化吗？小票今年是否难？如果玩法是一直推高指数成分股。</p>
+<p>当泡沫存在时候，信用与获得的资产比小，当钱收紧的时候，信用与获得的资产的比大，那时候信用很值钱。</p>
+<h1 id="2021-01-08"><a href="#2021-01-08" class="headerlink" title="2021/01/08"></a>2021/01/08</h1><p>今年的股票交易策略？</p>
+<p>职业生涯如何规划？怎样走？</p>
+<p>今年要关注哪里？又想学架构，又想学前端，又想学算法。我想还是要业务驱动，算法+前端应该是今年的主要关注方向。以量化为业务，熟悉市场。</p>
 
       
     </div>
@@ -839,74 +924,6 @@
 <p>读写csv、txt</p>
 <p>数据库curd（MySQL SQL server）</p>
 <p>Berkeley DB 读写</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/14/Csharp%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="六时吉祥">
-      <meta itemprop="description" content="法尚应舍，何况非法">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="六时杂谈">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/14/Csharp%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">Csharp应用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-14 16:13:32" itemprop="dateCreated datePublished" datetime="2020-09-14T16:13:32+08:00">2020-09-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-30 13:08:38" itemprop="dateModified" datetime="2020-12-30T13:08:38+08:00">2020-12-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>C# 通用模块</p>
-<p>C#获取自定义类的类型，然后通过类型的GetProperties方法获得公共属性，自定义的类的成员要有get set方法。</p>
-<p>二十四小时制：yyyy/MM/dd HH:mm:ss.fff</p>
-<p>十二小时制：yyyy/MM/dd hh:mm:ss.fff</p>
 
       
     </div>
@@ -993,14 +1010,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
