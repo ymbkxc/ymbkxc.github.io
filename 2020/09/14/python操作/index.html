@@ -28,7 +28,7 @@
 <meta property="og:description" content="统计某列元素中值的个数： 12dict(biaoqian[&amp;#x27;发现角裂支数合计&amp;#x27;].value_counts())     获取单列： 1condata.loc[:,&amp;#x27;发现角裂支数合计&amp;#x27;]  根据dataframe中某一列进行判断 并根据判断结果赋值到另一列 1condata[&amp;#x27;标签&amp;#x27;] &#x3D; condata.发现角裂支数合计.apply(l">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-14T08:13:32.000Z">
-<meta property="article:modified_time" content="2021-01-12T08:53:40.742Z">
+<meta property="article:modified_time" content="2021-03-08T06:14:41.326Z">
 <meta property="article:author" content="六时吉祥">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="知识点">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-12 16:53:40" itemprop="dateModified" datetime="2021-01-12T16:53:40+08:00">2021-01-12</time>
+                <time title="Modified: 2021-03-08 14:14:41" itemprop="dateModified" datetime="2021-03-08T14:14:41+08:00">2021-03-08</time>
               </span>
 
           
@@ -262,7 +262,30 @@
 <p><strong>python查看安装包所在路径</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> qlib</span><br><span class="line"></span><br><span class="line">print(qlib.__file__)</span><br></pre></td></tr></table></figure>
 
+<p><strong>jupyter 打开指定文件夹中的ipynb文件：</strong></p>
+<p>cmd中切换到包含ipynb的目录，之后再次目录中打开jupyter lab即可。</p>
+<p><strong>dataframe调整某个列的位置：</strong></p>
+<p>可以将列拿出来，再删除掉，然后再插入指定位置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MAT_NO = result.MAT_NO</span><br><span class="line">result = result.drop(<span class="string">&#x27;MAT_NO&#x27;</span>,axis = <span class="number">1</span>)</span><br><span class="line">result.insert(<span class="number">2</span>,<span class="string">&#x27;MAT_NO&#x27;</span>,MAT_NO)</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加到最后：</span></span><br><span class="line">result[<span class="string">&#x27;HOT_JZ_FLAG&#x27;</span>] = HOT_JZ_FLAG</span><br></pre></td></tr></table></figure>
 
+<p><strong>list生成dataframe 并去掉包含NAN的值的行:</strong></p>
+<p>注意转置问题，将列表生成字典，然后将字典转为DataFrame格式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">formatted_date = [price[<span class="string">&#x27;formatted_date&#x27;</span>] <span class="keyword">for</span> price <span class="keyword">in</span> prices]</span><br><span class="line">adjclose = [price[<span class="string">&#x27;adjclose&#x27;</span>] <span class="keyword">for</span> price <span class="keyword">in</span> prices]</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&#x27;formatted_date&#x27;</span>:formatted_date,<span class="string">&#x27;adjclose&#x27;</span>:adjclose&#125;) </span><br><span class="line">df = df.dropna(axis=<span class="number">0</span>,how=<span class="string">&#x27;any&#x27;</span>) <span class="comment">#drop all rows that have any NaN values</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>python matplotlib 绘图 X轴文本间隔显示、设置大小、X轴坐标旋转：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">25</span>,<span class="number">25</span>))</span><br><span class="line">plt.plot(df[<span class="string">&#x27;formatted_date&#x27;</span>],df[<span class="string">&#x27;adjclose&#x27;</span>])</span><br><span class="line">plt.xticks(range(<span class="number">0</span>,len(df[<span class="string">&#x27;formatted_date&#x27;</span>]),<span class="number">6</span>))</span><br><span class="line">plt.xticks(fontproperties = <span class="string">&#x27;Times New Roman&#x27;</span> ,size = <span class="number">25</span>,rotation = <span class="number">90</span>) </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><strong>字典推导式：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取pono与其索引的dic</span></span><br><span class="line"><span class="comment">#dic：&#123;板坯号:[索引,日期]</span></span><br><span class="line">ponodic = &#123;lfdata_temper.loc[i,<span class="string">&#x27;MAT_NO&#x27;</span>]: [i,lfdata_temper.loc[i,<span class="string">&#x27;time&#x27;</span>],lfdata_temper.loc[i,<span class="string">&#x27;SLAB_CUT_TIME&#x27;</span>]] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(lfdata_temper[<span class="string">&#x27;MAT_NO&#x27;</span>])) &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>筛选时间范围：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hfdata[hfdata.time.between(<span class="string">&#x27;2021-02-24 00:12:00&#x27;</span>,<span class="string">&#x27;2021-02-24 00:12:01&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<p><strong>判断文件是否存在：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">my_file_hf = Path(hffile)</span><br><span class="line">my_file_hf.is_file()</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建txt并追加内容：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_str_to_txt</span>(<span class="params">date,str_data</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    创建txt，并且写入</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    path_file_name = <span class="string">&#x27;./action_&#123;&#125;.txt&#x27;</span>.format(date)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(path_file_name):</span><br><span class="line">        <span class="keyword">with</span> open(path_file_name, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            print(f)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(path_file_name, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(str_data)</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -358,7 +381,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
