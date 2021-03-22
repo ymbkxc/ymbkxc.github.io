@@ -27,14 +27,16 @@
 <meta property="og:site_name" content="六时杂谈">
 <meta property="og:description" content="将10年美债收益率曲线与A股沪深指数日线放在一起对比。沪深指数日线来自quantaxis。 TNX:十年期国库券 IRX:十三周国库券短期利率 TYX:三十年期政府公债 1234567891011121314151617181920212223242526import yahoofinancials as yffrom yahoofinancials import YahooFinancialsi">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/ymrsxc/liushizatan/raw/master/mzsyl.png">
 <meta property="article:published_time" content="2021-03-18T07:28:19.000Z">
-<meta property="article:modified_time" content="2021-03-18T08:01:18.039Z">
+<meta property="article:modified_time" content="2021-03-22T07:35:37.647Z">
 <meta property="article:author" content="六时吉祥">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="金融">
 <meta property="article:tag" content="美债收益率">
 <meta property="article:tag" content="yahoofinancials">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/ymrsxc/liushizatan/raw/master/mzsyl.png">
 
 <link rel="canonical" href="http://example.com/2021/03/18/%E9%80%9A%E8%BF%87yahoofinancials%E8%8E%B7%E5%8F%96%E7%BE%8E%E5%80%BA%E6%94%B6%E7%9B%8A%E7%8E%87/">
 
@@ -186,10 +188,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-03-18 15:28:19 / Modified: 16:01:18" itemprop="dateCreated datePublished" datetime="2021-03-18T15:28:19+08:00">2021-03-18</time>
+              <time title="Created: 2021-03-18 15:28:19" itemprop="dateCreated datePublished" datetime="2021-03-18T15:28:19+08:00">2021-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-22 15:35:37" itemprop="dateModified" datetime="2021-03-22T15:35:37+08:00">2021-03-22</time>
+              </span>
 
           
 
@@ -213,6 +221,9 @@
 <p>将结果绘图展示：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </span><br><span class="line">fig = plt.figure(figsize=(<span class="number">35</span>,<span class="number">35</span>))</span><br><span class="line">ax1 = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">ax1.plot(result[<span class="string">&#x27;date&#x27;</span>],result[<span class="string">&#x27;adjclose&#x27;</span>],<span class="string">&#x27;b&#x27;</span>,linestyle=<span class="string">&#x27;--&#x27;</span>,marker=<span class="string">&#x27;o&#x27;</span>,label=<span class="string">&#x27;USG10Y&#x27;</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">&#x27;USG10Y&#x27;</span>)</span><br><span class="line">ax2 = ax1.twinx()  <span class="comment"># this is the important function</span></span><br><span class="line">ax2.plot(result[<span class="string">&#x27;date&#x27;</span>],result[<span class="string">&#x27;close&#x27;</span>],<span class="string">&#x27;r&#x27;</span>,linestyle=<span class="string">&#x27;--&#x27;</span>,marker=<span class="string">&#x27;o&#x27;</span>,label=<span class="string">&#x27;SH&#x27;</span>)</span><br><span class="line">ax2.set_ylabel(<span class="string">&#x27;SH&#x27;</span>)</span><br><span class="line">plt.xticks(range(<span class="number">0</span>,len(result[<span class="string">&#x27;date&#x27;</span>]),<span class="number">10</span>))</span><br><span class="line">fig.legend(loc=<span class="number">1</span>, bbox_to_anchor=(<span class="number">1</span>,<span class="number">1</span>), bbox_transform=ax1.transAxes)</span><br><span class="line">ax1.xaxis.grid(<span class="literal">True</span>, which=<span class="string">&#x27;major&#x27;</span>) <span class="comment">#x坐标轴的网格使用主刻度</span></span><br><span class="line">plt.grid(ls=<span class="string">&quot;:&quot;</span>,c=<span class="string">&#x27;gray&#x27;</span>,axis=<span class="string">&quot;y&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
+<p>结果如图所示：</p>
+<p>将美债收益率与A股日线放在一起比较：</p>
+<p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/mzsyl.png" alt="mzsyl"></p>
 
     </div>
 
@@ -237,7 +248,10 @@
     <a href="/2021/03/18/MongoDB%E5%AD%A6%E4%B9%A0/" rel="prev" title="MongoDB学习">
       <i class="fa fa-chevron-left"></i> MongoDB学习
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/19/python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%A5%E5%BF%97/" rel="next" title="python学习之日志">
+      python学习之日志 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -311,14 +325,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
