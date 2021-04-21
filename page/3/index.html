@@ -188,7 +188,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-29 09:58:14" itemprop="dateModified" datetime="2021-03-29T09:58:14+08:00">2021-03-29</time>
+                <time title="Modified: 2021-04-19 10:17:14" itemprop="dateModified" datetime="2021-04-19T10:17:14+08:00">2021-04-19</time>
               </span>
 
           
@@ -223,6 +223,16 @@
 
 
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> RAL512</span><br><span class="line"><span class="comment">--TRUNCATE table ZoneSeg </span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> ZoneSeg (zoneID,distance,stDistance,edDistance,seg) <span class="keyword">values</span></span><br><span class="line">(	<span class="number">51</span>	,	<span class="number">30076</span>	,	<span class="number">0</span>	,	<span class="number">30076</span>	,	<span class="string">&#x27;JPF&#x27;</span>	),</span><br><span class="line">(	<span class="number">52</span>	,	<span class="number">23720</span>	,	<span class="number">30076</span>	,	<span class="number">53796</span>	,	<span class="string">&#x27;JPF&#x27;</span>	),</span><br><span class="line">(	<span class="number">53</span>	,	<span class="number">81860</span>	,	<span class="number">53796</span>	,	<span class="number">135656</span>	,	<span class="string">&#x27;RTF1&#x27;</span>	)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>SQL创建临时表：</strong></p>
+<p>tempdb.. 后面为临时表名称，临时表开头有#记号。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--创建临时表（用户存放需要进行替换的数据）</span></span><br><span class="line">if object_id(&#x27;tempdb..<span class="comment">#UserTable&#x27;) is not null Begin</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="comment">#UserTable</span></span><br><span class="line"><span class="keyword">End</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="comment">#UserTable</span></span><br><span class="line">(</span><br><span class="line">   <span class="built_in">number</span> <span class="built_in">int</span>,</span><br><span class="line">   UserID <span class="built_in">int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>SQL SERVER 中判断不为空 不用 ！= 或者&lt;&gt; 而是 is not  NULL</em></strong></p>
+<p><strong>SQL查询表中某列字段数据重复次数:</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> CC</span><br><span class="line"><span class="keyword">select</span> PONO,<span class="keyword">count</span>(PONO) <span class="keyword">as</span> <span class="keyword">count</span> <span class="keyword">from</span> CC.dbo.TurnoverDatabackup  <span class="keyword">group</span> <span class="keyword">by</span>  PONO <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt;<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 
       
