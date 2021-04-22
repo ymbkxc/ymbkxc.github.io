@@ -188,7 +188,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-19 10:17:14" itemprop="dateModified" datetime="2021-04-19T10:17:14+08:00">2021-04-19</time>
+                <time title="Modified: 2021-04-22 13:43:21" itemprop="dateModified" datetime="2021-04-22T13:43:21+08:00">2021-04-22</time>
               </span>
 
           
@@ -208,15 +208,24 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">top <span class="number">1</span> AYL_TIME <span class="keyword">as</span> 分析时间</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="keyword">from</span>  [CC].[dbo].[QMTQTBEBCQ1QBEQ] <span class="keyword">where</span> PONO = &#123;&#125; <span class="keyword">order</span> <span class="keyword">by</span> AYL_TIME <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>SQL server 更改数据库目录，并还原数据库：</strong></p>
-<p>1.分离该数据库，右键后勾选删除和更新。</p>
-<p>2.将mdf和ldf拷贝到目标目录，并将文件权限完全放开。</p>
-<p>3.数据库右键附加，确认是目标路径位置</p>
-<p>4.还原数据库，</p>
+<p>1.分离该数据库，右键后勾选删除和更新；</p>
+<p>2.将mdf和ldf拷贝到目标目录，并将文件权限完全放开；</p>
+<p>3.数据库右键附加，确认是目标路径位置；</p>
+<p>4.还原数据库。</p>
 <p>如果数据库还原失败，一直显示正在还原，通过执行语句进行解决。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RESTORE</span> <span class="keyword">database</span> 数据库名  <span class="keyword">with</span> <span class="keyword">recovery</span></span><br></pre></td></tr></table></figure>
 
 <p>还原数据库时，注意数据库位置要更改一下。</p>
-<p>SQL server 插入多行数据：</p>
+<p>数据库还原：</p>
+<p>首先将数据库的限制访问改成single：</p>
+<p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/image-20210422133724481.png" alt="image-20210422133724481"></p>
+<p>右键数据库→还原→数据库→设备。选择bak文件。</p>
+<p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/image-20210422133904231.png" alt="image-20210422133904231"></p>
+<p>右侧选择页中的文件进行mdf和log文件的位置设置。</p>
+<p><img src="C:\Users\User\AppData\Roaming\Typora\typora-user-images\image-20210422134032126.png" alt="image-20210422134032126"></p>
+<p>之后在选项中勾选覆盖现有数据库</p>
+<p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/image-20210422134157355.png" alt="image-20210422134157355"></p>
+<p><strong>SQL server 插入多行数据：</strong></p>
 <p>行数多可以再excel中批量生成多行，excel中 公式中插入单引号：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&quot;&#39;&quot;&amp;I2&amp;&quot;&#39;&quot;</span><br></pre></td></tr></table></figure>
 
