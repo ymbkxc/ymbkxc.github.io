@@ -978,7 +978,7 @@ struct ResolInput
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-30 13:12:28" itemprop="dateModified" datetime="2021-03-30T13:12:28+08:00">2021-03-30</time>
+                <time title="Modified: 2021-04-26 08:39:12" itemprop="dateModified" datetime="2021-04-26T08:39:12+08:00">2021-04-26</time>
               </span>
 
           
@@ -993,6 +993,7 @@ struct ResolInput
 
       
           <p>Cpp通用算法接口、数据交互模块</p>
+<hr>
 <p>读写csv、txt</p>
 <p>数据库curd（MySQL SQL server）</p>
 <p>Berkeley DB 读写</p>
@@ -1001,6 +1002,10 @@ struct ResolInput
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.28.29333\include</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/image-20210330131150234.png" alt="image-20210330131150234"></p>
+<p><strong>自定义头文件在cpp文件中找不到的问题：</strong></p>
+<p>在VC++目录中加入： $(ProjectDir)</p>
+<p>#include&lt;xx.h&gt; 表示直接从编译器自带的函数库中寻找文件,编译器从标准库路径开始搜索.xxh</p>
+<p>include”xx.h” 表示先从自定义的文件中找 ，如果找不到在从函数库中寻找文件,编译器从用户的工作路径开始搜索 xx.h</p>
 
       
     </div>
