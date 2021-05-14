@@ -293,7 +293,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-10 13:19:45" itemprop="dateModified" datetime="2021-05-10T13:19:45+08:00">2021-05-10</time>
+                <time title="Modified: 2021-05-14 10:43:21" itemprop="dateModified" datetime="2021-05-14T10:43:21+08:00">2021-05-14</time>
               </span>
 
           
@@ -448,6 +448,36 @@
 
 <p><strong>vscode 选择python 解释器：</strong></p>
 <p>右键单击选择命令面板，接着输入python:select选择 Select：Interpreter 然后进行选择。另外点击底部的python解释器也可以设置</p>
+<p><strong>python 字典排序：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sortedlendict =sorted(hotlendict.items(),key=<span class="keyword">lambda</span> kv:(kv[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>python list 转换为带索引的字典：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hotlendict = dict(zip(hotlenlist,range(len(hotlenlist ))))</span><br></pre></td></tr></table></figure>
+
+<p><strong>python 创建空DataFrame：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame()</span><br></pre></td></tr></table></figure>
+
+<p><strong>python 字典 转 DataFrame:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(pd.Series(hotlenlist), columns=[<span class="string">&#x27;pos&#x27;</span>])</span><br><span class="line">            df.reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">            <span class="comment">#df = df.reset_index().rename(columns=&#123;&#x27;pos&#x27;:&#x27;id&#x27;&#125;)</span></span><br><span class="line">            df.to_csv(<span class="string">&#x27;D:/工作文件/512/可视化/hotlenlist.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>python 元组组成的列表转为字典：</strong></p>
+<p>字典排序后转换为list，其中元素为排序的键值对组成的元组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cc = [(<span class="string">&#x27;1&#x27;</span>,<span class="number">1</span>),(<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;jiqw&#x27;</span>),(<span class="string">&#x27;3&#x27;</span>,<span class="number">1372</span>)]        </span><br><span class="line"> dict(cc)</span><br><span class="line">&#123;<span class="string">&#x27;1&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;3&#x27;</span>: <span class="number">1372</span>, <span class="string">&#x27;2&#x27;</span>: <span class="string">&#x27;jiqw&#x27;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>python 去除列表中小于某个数的值：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hotlenlist=list(filter(<span class="keyword">lambda</span> x:x&gt;=<span class="number">1</span>, hotlenlist))</span><br><span class="line"></span><br><span class="line">newnums=[i <span class="keyword">for</span> i <span class="keyword">in</span> nums <span class="keyword">if</span> i&gt;=<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>利用字典推导式筛选字典中满足条件的键值对：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">headerTable = &#123;k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> dictll.items() <span class="keyword">if</span> k &gt; <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>python下载whl：</strong></p>
+<p>可以去官方网站去下载，左侧 Release history 查找历史版本 <a target="_blank" rel="noopener" href="https://pypi.org/project/zeroc-ice/3.7.4/#files">https://pypi.org/project/zeroc-ice/3.7.4/#files</a></p>
+<p>第三方下载地址：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<p><strong>python colorbar:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">15</span>,<span class="number">4</span>)<span class="comment"># 设置 figsize</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;savefig.dpi&#x27;</span>] = <span class="number">1000</span> <span class="comment">#图片像素</span></span><br><span class="line">plt.axvline(x=<span class="number">0</span>,color=<span class="string">&#x27;b&#x27;</span>,linestyle=<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">h = plt.contourf(X,Y,zarray,cmap=<span class="string">&#x27;bwr&#x27;</span>,levels=np.linspace(<span class="number">-20</span>,<span class="number">20</span>,<span class="number">40</span>))<span class="comment">#,extend=&#x27;both&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;plot contourf&#x27;</span>)</span><br><span class="line">cb  = plt.colorbar(h)</span><br><span class="line">cb.ax.tick_params(labelsize=<span class="number">8</span>)  <span class="comment">#设置色标刻度字体大小。</span></span><br><span class="line"></span><br><span class="line">cb.formatter.set_scientific(<span class="literal">True</span>)</span><br><span class="line">plt.xticks(fontsize=<span class="number">8</span>)</span><br><span class="line">plt.yticks(fontsize=<span class="number">8</span>)</span><br><span class="line">font = &#123;<span class="string">&#x27;family&#x27;</span> : <span class="string">&#x27;serif&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;color&#x27;</span>  : <span class="string">&#x27;darkred&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;weight&#x27;</span> : <span class="string">&#x27;normal&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;size&#x27;</span>   : <span class="number">8</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">tick_locator = ticker.MaxNLocator(nbins=<span class="number">10</span>)  <span class="comment"># colorbar上的刻度值个数</span></span><br><span class="line">cb.locator = tick_locator</span><br><span class="line">cb.update_ticks()</span><br><span class="line">cb.set_label(<span class="literal">None</span>,fontdict=font) <span class="comment">#设置colorbar的标签字体及其大小</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
