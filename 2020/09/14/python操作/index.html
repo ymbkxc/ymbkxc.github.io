@@ -28,7 +28,7 @@
 <meta property="og:description" content="统计某列元素中值的个数： 12dict(biaoqian[&amp;#x27;发现角裂支数合计&amp;#x27;].value_counts())     获取单列： 1condata.loc[:,&amp;#x27;发现角裂支数合计&amp;#x27;]  根据dataframe中某一列进行判断 并根据判断结果赋值到另一列 1condata[&amp;#x27;标签&amp;#x27;] &#x3D; condata.发现角裂支数合计.apply(l">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-14T08:13:32.000Z">
-<meta property="article:modified_time" content="2021-05-14T02:43:21.538Z">
+<meta property="article:modified_time" content="2021-05-26T02:02:26.479Z">
 <meta property="article:author" content="六时吉祥">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="知识点">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-14 10:43:21" itemprop="dateModified" datetime="2021-05-14T10:43:21+08:00">2021-05-14</time>
+                <time title="Modified: 2021-05-26 10:02:26" itemprop="dateModified" datetime="2021-05-26T10:02:26+08:00">2021-05-26</time>
               </span>
 
           
@@ -377,6 +377,24 @@
 <p><strong>python colorbar:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">15</span>,<span class="number">4</span>)<span class="comment"># 设置 figsize</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;savefig.dpi&#x27;</span>] = <span class="number">1000</span> <span class="comment">#图片像素</span></span><br><span class="line">plt.axvline(x=<span class="number">0</span>,color=<span class="string">&#x27;b&#x27;</span>,linestyle=<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">h = plt.contourf(X,Y,zarray,cmap=<span class="string">&#x27;bwr&#x27;</span>,levels=np.linspace(<span class="number">-20</span>,<span class="number">20</span>,<span class="number">40</span>))<span class="comment">#,extend=&#x27;both&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;plot contourf&#x27;</span>)</span><br><span class="line">cb  = plt.colorbar(h)</span><br><span class="line">cb.ax.tick_params(labelsize=<span class="number">8</span>)  <span class="comment">#设置色标刻度字体大小。</span></span><br><span class="line"></span><br><span class="line">cb.formatter.set_scientific(<span class="literal">True</span>)</span><br><span class="line">plt.xticks(fontsize=<span class="number">8</span>)</span><br><span class="line">plt.yticks(fontsize=<span class="number">8</span>)</span><br><span class="line">font = &#123;<span class="string">&#x27;family&#x27;</span> : <span class="string">&#x27;serif&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;color&#x27;</span>  : <span class="string">&#x27;darkred&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;weight&#x27;</span> : <span class="string">&#x27;normal&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;size&#x27;</span>   : <span class="number">8</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">tick_locator = ticker.MaxNLocator(nbins=<span class="number">10</span>)  <span class="comment"># colorbar上的刻度值个数</span></span><br><span class="line">cb.locator = tick_locator</span><br><span class="line">cb.update_ticks()</span><br><span class="line">cb.set_label(<span class="literal">None</span>,fontdict=font) <span class="comment">#设置colorbar的标签字体及其大小</span></span><br></pre></td></tr></table></figure>
 
+<p><strong>python 统计array中满足某条件的元素个数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">percent = np.sum(abs(CPCCylinderPos8)&gt;=<span class="number">50</span>)/len(CPCCylinderPos8)*<span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>python 截取字符串：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">len(filename)</span><br><span class="line">filename = filename[<span class="number">-9</span>:<span class="number">-1</span>]<span class="comment"># 左闭右开</span></span><br><span class="line">	filename = filename[<span class="number">-9</span>:]<span class="comment"># 左闭右开	</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>python 查找文件是否存在：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">existsflag = os.path.exists(value)  </span><br></pre></td></tr></table></figure>
+
+<p><strong>python 跳过异常继续运行循环：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	<span class="comment">##&#x27;有可能出现异常的代码放在这里&#x27;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line">	<span class="keyword">continue</span></span><br><span class="line"><span class="comment">##在这里写继续执行新的语句</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>python list 反转：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flatnesschannel = list(reversed(flatnesschannel))</span><br></pre></td></tr></table></figure>
+
+<p><strong>python DataFrame 按列反转：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">realchanneldt = realchanneldt.iloc[:, ::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -473,14 +491,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

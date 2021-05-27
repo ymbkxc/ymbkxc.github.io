@@ -157,6 +157,171 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/30/Cpp%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/30/Cpp%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">Cpp通用模块</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-10-30 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-30T00:00:00+08:00">2020-10-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-26 08:39:12" itemprop="dateModified" datetime="2021-04-26T08:39:12+08:00">2021-04-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Cpp通用算法接口、数据交互模块</p>
+<hr>
+<p>读写csv、txt</p>
+<p>数据库curd（MySQL SQL server）</p>
+<p>Berkeley DB 读写</p>
+<p><strong>vs2019 无法打开 <iostream> 解决办法：</strong></p>
+<p>项目→属性→平台工具集  选择合适的版本，本项目应用v142平台工具集。应用此平台工具集总是出现无法打开iostream的问题，以及无法找到vcruntime.h的问题。在项目的属性页中选择VC++ 目录，在包含目录中加入vcruntime.h的路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.28.29333\include</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/image-20210330131150234.png" alt="image-20210330131150234"></p>
+<p><strong>自定义头文件在cpp文件中找不到的问题：</strong></p>
+<p>在VC++目录中加入： $(ProjectDir)</p>
+<p>#include&lt;xx.h&gt; 表示直接从编译器自带的函数库中寻找文件,编译器从标准库路径开始搜索.xxh</p>
+<p>include”xx.h” 表示先从自定义的文件中找 ，如果找不到在从函数库中寻找文件,编译器从用户的工作路径开始搜索 xx.h</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/14/Csharp%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/14/Csharp%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">Csharp应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-14 16:13:32" itemprop="dateCreated datePublished" datetime="2020-09-14T16:13:32+08:00">2020-09-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-24 15:29:07" itemprop="dateModified" datetime="2021-05-24T15:29:07+08:00">2021-05-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>C# 通用模块</p>
+<p>C#获取自定义类的类型，然后通过类型的GetProperties方法获得公共属性，自定义的类的成员要有get set方法。</p>
+<p>二十四小时制：yyyy/MM/dd HH:mm:ss.fff</p>
+<p>十二小时制：yyyy/MM/dd hh:mm:ss.fff</p>
+<p><strong>C#应用log4net 进行日志记录：</strong></p>
+<p>需要设置config.app文件内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;configSections&gt;</span><br><span class="line">    &lt;section name&#x3D;&quot;log4net&quot; type&#x3D;&quot;System.Configuration.IgnoreSectionHandler&quot;&#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;configSections&gt;</span><br><span class="line">  &lt;log4net&gt;</span><br><span class="line">    &lt;appender name&#x3D;&quot;LogFileAppender&quot; type&#x3D;&quot;log4net.Appender.RollingFileAppender&quot;&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;File&quot; value&#x3D;&quot;FetchCPCFator.log&quot;&#x2F;&gt;</span><br><span class="line">      &lt;!--输出的日志不会覆盖以前的信息--&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;AppendToFile&quot; value&#x3D;&quot;true&quot;&#x2F;&gt;</span><br><span class="line">      &lt;!--备份文件的个数，最多存放100个日志--&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;MaxSizeRollBackups&quot; value&#x3D;&quot;100&quot; &#x2F;&gt;</span><br><span class="line">      &lt;!--单个日志文件的最大大小,100代表1KB,102400代表102KB，1024000&#x3D;1M，10240000&#x3D;10M--&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;MaxFileSize&quot; value&#x3D;&quot;10240000&quot; &#x2F;&gt;</span><br><span class="line">      &lt;!--是否使用静态文件名--&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;StaticLogFileName&quot; value&#x3D;&quot;false&quot; &#x2F;&gt;</span><br><span class="line">      &lt;!-- RollingStyle的赋值:</span><br><span class="line">                Once :代表只负责记录，不考虑文件大小和日期</span><br><span class="line">                Size:代表只判断文件大小进行日志新文件创建输出</span><br><span class="line">                Date:代表只判断日期间隔进行日志新文件创建输出</span><br><span class="line">                Composite:代表对文件大小和日期间隔都需要进行判断并创建新文件输出</span><br><span class="line">      --&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;RollingStyle&quot; value&#x3D;&quot;Composite&quot; &#x2F;&gt;</span><br><span class="line">      &lt;layout type&#x3D;&quot;log4net.Layout.PatternLayout&quot;&gt;</span><br><span class="line">        &lt;param name&#x3D;&quot;Header&quot; value&#x3D;&quot;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;param name&#x3D;&quot;Footer&quot; value&#x3D;&quot;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;param name&#x3D;&quot;ConversionPattern&quot; value&#x3D;&quot;%d   [%t] [%c]  %-5p:%m%n&quot;&#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;layout&gt;</span><br><span class="line">      &lt;lockingModel type&#x3D;&quot;log4net.Appender.FileAppender+MinimalLock&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;appender&gt;</span><br><span class="line">    &lt;appender name&#x3D;&quot;Log&quot; type&#x3D;&quot;log4net.Appender.RollingFileAppender&quot;&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;File&quot; value&#x3D;&quot;cbalanceui.log&quot;&#x2F;&gt;</span><br><span class="line">      &lt;param name&#x3D;&quot;AppendToFile&quot; value&#x3D;&quot;true&quot;&#x2F;&gt;</span><br><span class="line">      &lt;layout type&#x3D;&quot;log4net.Layout.PatternLayout&quot;&gt;</span><br><span class="line">        &lt;param name&#x3D;&quot;Header&quot; value&#x3D;&quot;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;param name&#x3D;&quot;Footer&quot; value&#x3D;&quot;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;param name&#x3D;&quot;ConversionPattern&quot; value&#x3D;&quot;%d   [%t] [%c]  %-5p:%m%n&quot;&#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;layout&gt;</span><br><span class="line">      &lt;lockingModel type&#x3D;&quot;log4net.Appender.FileAppender+MinimalLock&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;appender&gt;</span><br><span class="line"></span><br><span class="line">    &lt;logger name&#x3D;&quot;Form&quot;&gt;</span><br><span class="line">      &lt;level value&#x3D;&quot;INFO&quot; &#x2F;&gt;</span><br><span class="line">      &lt;appender-ref ref&#x3D;&quot;Log&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;logger&gt;</span><br><span class="line">    &lt;logger name&#x3D;&quot;Log&quot;&gt;</span><br><span class="line">      &lt;level value&#x3D;&quot;ERROR&quot; &#x2F;&gt;</span><br><span class="line">      &lt;appender-ref ref&#x3D;&quot;Log&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;logger&gt;</span><br><span class="line">    &lt;logger name&#x3D;&quot;LogFileAppender&quot;&gt;</span><br><span class="line">      &lt;level value&#x3D;&quot;DEBUG&quot; &#x2F;&gt;</span><br><span class="line">      &lt;appender-ref ref&#x3D;&quot;LogFileAppender&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;logger&gt;</span><br><span class="line">    &lt;root&gt;</span><br><span class="line">      &lt;level value&#x3D;&quot;DEBUG&quot; &#x2F;&gt;</span><br><span class="line">      &lt;appender-ref ref&#x3D;&quot;LogFileAppender&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;root&gt;</span><br><span class="line">  &lt;&#x2F;log4net&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取文件夹下的某个后缀的所有文件:</strong></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 获取文件夹下的某个后缀的所有文件</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;path&quot;&gt;</span>文件路劲<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;ExtName&quot;&gt;</span>文件后缀<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;FileInfo&gt; <span class="title">GetFile</span>(<span class="params"><span class="keyword">string</span> path, <span class="keyword">string</span> ExtName</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        List&lt;FileInfo&gt; lst = <span class="keyword">new</span> List&lt;FileInfo&gt;();</span><br><span class="line">        <span class="keyword">string</span>[] dir = Directory.GetDirectories(path);<span class="comment">// 文件夹列表</span></span><br><span class="line">        DirectoryInfo directoryInfo = <span class="keyword">new</span> DirectoryInfo(path);</span><br><span class="line">        FileInfo[] files = directoryInfo.GetFiles();</span><br><span class="line">        <span class="keyword">if</span> (files.Length != <span class="number">0</span> || dir.Length != <span class="number">0</span>) <span class="comment">// 当前目录文件或文件夹不能为空</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">foreach</span> (FileInfo f <span class="keyword">in</span> files)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (ExtName.ToLower().IndexOf(f.Extension.ToLower()) &gt;= <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    lst.Add(f);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">string</span> d <span class="keyword">in</span> dir)</span><br><span class="line">            &#123;</span><br><span class="line">                GetFile(d, ExtName);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lst;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">throw</span> ex;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>DataTable 存储为txt：</strong></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//DataTable 存储为txt</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DataTableToTxt</span>(<span class="params">DataTable vContent, <span class="keyword">string</span> vOutputFilePath</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    StringBuilder sTxtContent;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (File.Exists(vOutputFilePath))</span><br><span class="line">            File.Delete(vOutputFilePath);</span><br><span class="line"></span><br><span class="line">        sTxtContent = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数据</span></span><br><span class="line">        <span class="keyword">foreach</span> (DataRow row <span class="keyword">in</span> vContent.Rows)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vContent.Columns.Count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                sTxtContent.Append(row[i].ToString().Trim());</span><br><span class="line">                sTxtContent.Append(i == vContent.Columns.Count - <span class="number">1</span> ? <span class="string">&quot;\r\n&quot;</span> : <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        File.WriteAllText(vOutputFilePath, sTxtContent.ToString(), Encoding.Unicode);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>计算程序运行时间：</strong></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Diagnostics;</span><br><span class="line">Stopwatch myWatch = <span class="keyword">new</span> Stopwatch();</span><br><span class="line">myWatch.Start();</span><br><span class="line"><span class="comment">// 程序</span></span><br><span class="line">myWatch.Stop();</span><br><span class="line"><span class="keyword">long</span> myUseTime = myWatch.ElapsedMilliseconds;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;執行時間: &quot;</span> + myUseTime.ToString() + <span class="string">&quot; ms&quot;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>割文件路径中的文件名与路径：</strong></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> pPath = System.IO.Path.GetDirectoryName(pFullpath); <span class="comment">//获取文件路径</span></span><br><span class="line"><span class="keyword">string</span> pName = System.IO.Path.GetFileName(pFullpath); <span class="comment">//获取文件名</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/14/SQL%E5%BA%94%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -293,7 +458,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-14 10:43:21" itemprop="dateModified" datetime="2021-05-14T10:43:21+08:00">2021-05-14</time>
+                <time title="Modified: 2021-05-26 10:02:26" itemprop="dateModified" datetime="2021-05-26T10:02:26+08:00">2021-05-26</time>
               </span>
 
           
@@ -478,6 +643,24 @@
 <p><strong>python colorbar:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">15</span>,<span class="number">4</span>)<span class="comment"># 设置 figsize</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;savefig.dpi&#x27;</span>] = <span class="number">1000</span> <span class="comment">#图片像素</span></span><br><span class="line">plt.axvline(x=<span class="number">0</span>,color=<span class="string">&#x27;b&#x27;</span>,linestyle=<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">h = plt.contourf(X,Y,zarray,cmap=<span class="string">&#x27;bwr&#x27;</span>,levels=np.linspace(<span class="number">-20</span>,<span class="number">20</span>,<span class="number">40</span>))<span class="comment">#,extend=&#x27;both&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;plot contourf&#x27;</span>)</span><br><span class="line">cb  = plt.colorbar(h)</span><br><span class="line">cb.ax.tick_params(labelsize=<span class="number">8</span>)  <span class="comment">#设置色标刻度字体大小。</span></span><br><span class="line"></span><br><span class="line">cb.formatter.set_scientific(<span class="literal">True</span>)</span><br><span class="line">plt.xticks(fontsize=<span class="number">8</span>)</span><br><span class="line">plt.yticks(fontsize=<span class="number">8</span>)</span><br><span class="line">font = &#123;<span class="string">&#x27;family&#x27;</span> : <span class="string">&#x27;serif&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;color&#x27;</span>  : <span class="string">&#x27;darkred&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;weight&#x27;</span> : <span class="string">&#x27;normal&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;size&#x27;</span>   : <span class="number">8</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">tick_locator = ticker.MaxNLocator(nbins=<span class="number">10</span>)  <span class="comment"># colorbar上的刻度值个数</span></span><br><span class="line">cb.locator = tick_locator</span><br><span class="line">cb.update_ticks()</span><br><span class="line">cb.set_label(<span class="literal">None</span>,fontdict=font) <span class="comment">#设置colorbar的标签字体及其大小</span></span><br></pre></td></tr></table></figure>
 
+<p><strong>python 统计array中满足某条件的元素个数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">percent = np.sum(abs(CPCCylinderPos8)&gt;=<span class="number">50</span>)/len(CPCCylinderPos8)*<span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>python 截取字符串：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">len(filename)</span><br><span class="line">filename = filename[<span class="number">-9</span>:<span class="number">-1</span>]<span class="comment"># 左闭右开</span></span><br><span class="line">	filename = filename[<span class="number">-9</span>:]<span class="comment"># 左闭右开	</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>python 查找文件是否存在：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">existsflag = os.path.exists(value)  </span><br></pre></td></tr></table></figure>
+
+<p><strong>python 跳过异常继续运行循环：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	<span class="comment">##&#x27;有可能出现异常的代码放在这里&#x27;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line">	<span class="keyword">continue</span></span><br><span class="line"><span class="comment">##在这里写继续执行新的语句</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>python list 反转：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flatnesschannel = list(reversed(flatnesschannel))</span><br></pre></td></tr></table></figure>
+
+<p><strong>python DataFrame 按列反转：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">realchanneldt = realchanneldt.iloc[:, ::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -564,14 +747,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
