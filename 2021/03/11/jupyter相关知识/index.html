@@ -28,7 +28,7 @@
 <meta property="og:description" content="jupyter更改端口： 1.打开anaconda prompt输入如下指令生成配置文件： 1jupyter notebook --generate-config  运行完毕后此条信息有生成的配置文件路径 Writing default config to: C:\Users\User.jupyter\jupyter_notebook_config.py 2.打开配置文件找到： 指定端口 jupy">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-11T00:42:28.000Z">
-<meta property="article:modified_time" content="2021-03-11T00:47:53.659Z">
+<meta property="article:modified_time" content="2021-05-28T01:52:42.759Z">
 <meta property="article:author" content="六时吉祥">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="知识点">
@@ -185,10 +185,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-03-11 08:42:28 / Modified: 08:47:53" itemprop="dateCreated datePublished" datetime="2021-03-11T08:42:28+08:00">2021-03-11</time>
+              <time title="Created: 2021-03-11 08:42:28" itemprop="dateCreated datePublished" datetime="2021-03-11T08:42:28+08:00">2021-03-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-28 09:52:42" itemprop="dateModified" datetime="2021-05-28T09:52:42+08:00">2021-05-28</time>
+              </span>
 
           
 
@@ -201,15 +207,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>jupyter更改端口：</p>
+        <p><strong>jupyter更改端口：</strong></p>
 <p>1.打开anaconda prompt输入如下指令生成配置文件：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
 
 <p>运行完毕后此条信息有生成的配置文件路径</p>
 <p>Writing default config to: C:\Users\User.jupyter\jupyter_notebook_config.py</p>
 <p>2.打开配置文件找到：</p>
 <p>指定端口 jupyter的默认端口为8888,可以找到这一行去掉注释，更改成自己想指定的端口。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.port = 8889</span><br></pre></td></tr></table></figure>
+
+<p><strong>jupyer 配置远程登陆：</strong></p>
+<p>1.生成配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+
+<p>2.生成密钥</p>
+<p>进入python环境：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> notebook.auth <span class="keyword">import</span> passwd</span><br><span class="line">passwd()</span><br></pre></td></tr></table></figure>
+
+<p>3.编辑配置文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.ip=<span class="string">&#x27;*&#x27;</span>                                  <span class="comment"># 设置所有ip皆可访问  </span></span><br><span class="line">c.NotebookApp.password = <span class="string">u&#x27;sha:ce...       			# 生成的密文</span></span><br><span class="line"><span class="string">c.NotebookApp.open_browser = False                  # 禁止自动打开浏览器  </span></span><br><span class="line"><span class="string">c.NotebookApp.port =8888                           #随便指定一个端口  </span></span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -315,6 +332,12 @@
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
@@ -400,6 +423,8 @@
 
 
 
+
+  
 
   
 

@@ -458,7 +458,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-26 10:02:26" itemprop="dateModified" datetime="2021-05-26T10:02:26+08:00">2021-05-26</time>
+                <time title="Modified: 2021-06-25 08:41:20" itemprop="dateModified" datetime="2021-06-25T08:41:20+08:00">2021-06-25</time>
               </span>
 
           
@@ -625,6 +625,9 @@
 <p><strong>python 字典 转 DataFrame:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(pd.Series(hotlenlist), columns=[<span class="string">&#x27;pos&#x27;</span>])</span><br><span class="line">            df.reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">            <span class="comment">#df = df.reset_index().rename(columns=&#123;&#x27;pos&#x27;:&#x27;id&#x27;&#125;)</span></span><br><span class="line">            df.to_csv(<span class="string">&#x27;D:/工作文件/512/可视化/hotlenlist.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
+<p><strong>python 嵌套list创建DataFrame:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">steeldf = pd.DataFrame(codeclose_T,columns=incodename)</span><br></pre></td></tr></table></figure>
+
 <p><strong>python 元组组成的列表转为字典：</strong></p>
 <p>字典排序后转换为list，其中元素为排序的键值对组成的元组</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cc = [(<span class="string">&#x27;1&#x27;</span>,<span class="number">1</span>),(<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;jiqw&#x27;</span>),(<span class="string">&#x27;3&#x27;</span>,<span class="number">1372</span>)]        </span><br><span class="line"> dict(cc)</span><br><span class="line">&#123;<span class="string">&#x27;1&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;3&#x27;</span>: <span class="number">1372</span>, <span class="string">&#x27;2&#x27;</span>: <span class="string">&#x27;jiqw&#x27;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -660,6 +663,47 @@
 
 <p><strong>python DataFrame 按列反转：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">realchanneldt = realchanneldt.iloc[:, ::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>python 屏幕录制：</strong></p>
+<p>安装依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br><span class="line">pip install pynput</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">python 屏幕录制改进版，无opencv黑框显示！</span></span><br><span class="line"><span class="string">@zhou 2020/1/29_</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageGrab</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> pynput <span class="keyword">import</span> keyboard</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line">flag=<span class="literal">False</span>  <span class="comment">#停止标志位</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">video_record</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    屏幕录制！</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    name = datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H-%M-%S&#x27;</span>) <span class="comment">#当前的时间</span></span><br><span class="line">    p = ImageGrab.grab()  <span class="comment"># 获得当前屏幕</span></span><br><span class="line">    a, b = p.size  <span class="comment"># 获得当前屏幕的大小</span></span><br><span class="line">    fourcc = cv2.VideoWriter_fourcc(*<span class="string">&#x27;XVID&#x27;</span>)  <span class="comment"># 编码格式</span></span><br><span class="line">    video = cv2.VideoWriter(<span class="string">&#x27;%s.avi&#x27;</span>%name, fourcc, <span class="number">20</span>, (a, b))  <span class="comment"># 输出文件命名为test.mp4,帧率为16，可以自己设置</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        im = ImageGrab.grab()</span><br><span class="line">        imm=cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)<span class="comment">#转为opencv的BGR格式</span></span><br><span class="line">        video.write(imm)</span><br><span class="line">        <span class="keyword">if</span> flag:</span><br><span class="line">            print(<span class="string">&quot;录制结束！&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    video.release()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_press</span>(<span class="params">key</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    键盘监听事件！！！</span></span><br><span class="line"><span class="string">    :param key:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#print(key)</span></span><br><span class="line">    <span class="keyword">global</span> flag</span><br><span class="line">    <span class="keyword">if</span> key == keyboard.Key.esc:</span><br><span class="line">        flag=<span class="literal">True</span></span><br><span class="line">        print(<span class="string">&quot;stop monitor！&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span>  <span class="comment">#返回False，键盘监听结束！</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    th=threading.Thread(target=video_record)</span><br><span class="line">    th.start()</span><br><span class="line">    <span class="keyword">with</span> keyboard.Listener(on_press=on_press) <span class="keyword">as</span> listener:</span><br><span class="line">        listener.join()</span><br></pre></td></tr></table></figure>
+
+<p><strong>记录程序运行时间：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">time_start = time.time()</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">your  code </span><br><span class="line"><span class="comment">#</span></span><br><span class="line">time_end = time.time()</span><br><span class="line">print(<span class="string">&#x27;totally cost&#x27;</span>,time_end - time_start)</span><br></pre></td></tr></table></figure>
+
+<p><strong>DataFrame多条件筛选：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">satisfydt_lt30 = satisfydt[((satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&lt;<span class="number">20</span>) &amp; (satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&gt;<span class="number">0</span>))  |((satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&gt;<span class="number">-20</span>) &amp;(satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&lt;<span class="number">0</span>))]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Datarame 提取 指定列 生成字典</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># value 为list：</span></span><br><span class="line">coddic = steelindustry.groupby(<span class="string">&#x27;证券代码&#x27;</span>)[<span class="string">&#x27;证券名称&#x27;</span>,<span class="string">&#x27;中证四级名称&#x27;</span>].apply(list).to_dict()</span><br><span class="line"><span class="comment"># value 为单个值</span></span><br><span class="line">coddic =&#123;key:values <span class="keyword">for</span> key , values <span class="keyword">in</span> zip(steelindustry[<span class="string">&#x27;证券代码&#x27;</span>],steelindustry[<span class="string">&#x27;证券英文名&#x27;</span>])&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套list转置：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeclose_T = list(map(list, zip(*codeclose)))<span class="comment">#二维矩阵转置</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>sns绘制heatmap:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sns设置画布大小 放在一起运行有效</span></span><br><span class="line">matplotlib.pyplot.figure(figsize=(<span class="number">30</span>, <span class="number">16</span>))</span><br><span class="line">seaborn.heatmap(steeldf_corr, center=<span class="number">0</span>, annot=<span class="literal">True</span>,linewidths=<span class="number">0.05</span>, cmap=<span class="string">&#x27;YlGnBu&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><strong>计算两个list 相关性：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETF500close.corr(Baosteelclose)</span><br></pre></td></tr></table></figure>
+
+<p><strong>计算dataframe列相关性：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">steeldf_corr = steeldf.corr()</span><br></pre></td></tr></table></figure>
+
+<p><strong>python双循环推导式：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(x, y) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">300</span>,<span class="number">1000</span>,<span class="number">100</span>) <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">400</span>,<span class="number">1100</span>,<span class="number">100</span>) <span class="keyword">if</span> x != y]</span><br></pre></td></tr></table></figure>
+
+<p><strong>python 列表推导式</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lmargin = [ i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">300</span>,<span class="number">1000</span>,<span class="number">100</span>)]  <span class="comment"># </span></span><br><span class="line">rmargin = [ i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">400</span>,<span class="number">1100</span>,<span class="number">100</span>)]  <span class="comment"># </span></span><br><span class="line">l = [[i ,j] <span class="keyword">for</span> i, j <span class="keyword">in</span> zip(lmargin, rmargin)]  <span class="comment"># 字典推导式</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>python 安装 matplotlib:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install --user matplotlib==2.*</span><br></pre></td></tr></table></figure>
+
+<p><strong>python 字符串 补0：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stock_em_hsgt_stock_statistics_df[<span class="string">&#x27;股票代码&#x27;</span>] = stock_em_hsgt_stock_statistics_df[<span class="string">&#x27;股票代码&#x27;</span>].apply(<span class="keyword">lambda</span> x: str(x).zfill(<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
 
 
       
@@ -751,6 +795,12 @@
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
@@ -836,6 +886,8 @@
 
 
 
+
+  
 
   
 
