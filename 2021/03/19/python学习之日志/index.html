@@ -28,7 +28,7 @@
 <meta property="og:description" content="python日志输入位置更改方式： 在文件名中指定路径。filemode 模式：w：覆盖写；a:追加写。 123456789import logginglogging.basicConfig(    level&#x3D;logging.DEBUG,    format&#x3D;&quot;%(asctime)s - %(levelname)s - %(message)s&quot;,    datefmt&#x3D;&amp;qu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-19T07:57:41.000Z">
-<meta property="article:modified_time" content="2021-04-22T05:49:13.138Z">
+<meta property="article:modified_time" content="2021-07-19T06:46:44.555Z">
 <meta property="article:author" content="六时吉祥">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="log">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-22 13:49:13" itemprop="dateModified" datetime="2021-04-22T13:49:13+08:00">2021-04-22</time>
+                <time title="Modified: 2021-07-19 14:46:44" itemprop="dateModified" datetime="2021-07-19T14:46:44+08:00">2021-07-19</time>
               </span>
 
           
@@ -210,6 +210,13 @@
         <p>python日志输入位置更改方式：</p>
 <p>在文件名中指定路径。filemode 模式：<strong>w：覆盖写；a:追加写</strong>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(</span><br><span class="line">    level=logging.DEBUG,</span><br><span class="line">    format=<span class="string">&quot;%(asctime)s - %(levelname)s - %(message)s&quot;</span>,</span><br><span class="line">    datefmt=<span class="string">&quot;%m/%d/%Y %H:%M:%S %p&quot;</span>,</span><br><span class="line">    filename=<span class="string">&#x27;/opt/data/xiao/push.log&#x27;</span>,</span><br><span class="line">    filemode=<span class="string">&#x27;w&#x27;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果想因为日志高频写入容量增长快，可以指定限制日志大小：</p>
+<p>编写Utils文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> logging.handlers <span class="keyword">import</span> RotatingFileHandler</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">log_formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s %(levelname)s %(funcName)s(%(lineno)d) %(message)s&#x27;</span>)</span><br><span class="line">logFile = <span class="string">&#x27;D:/BPlatform3.7.4/log/forecast.log&#x27;</span></span><br><span class="line">my_handler = RotatingFileHandler(logFile, mode=<span class="string">&#x27;a&#x27;</span>, maxBytes=<span class="number">50</span>*<span class="number">1024</span>*<span class="number">1024</span>, </span><br><span class="line">                                 backupCount=<span class="number">1000</span>, encoding=<span class="literal">None</span>, delay=<span class="number">0</span>)</span><br><span class="line">my_handler.setFormatter(log_formatter)</span><br><span class="line">my_handler.setLevel(logging.DEBUG)</span><br><span class="line">app_log = logging.getLogger(<span class="string">&#x27;root&#x27;</span>)</span><br><span class="line">app_log.setLevel(logging.DEBUG)</span><br><span class="line">app_log.addHandler(my_handler)</span><br></pre></td></tr></table></figure>
+
+<p>其中 maxBytes设置每个log文件最大内存，backupCount为最大日志数。然后在应用的py文件中导入Utils.py文件即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Utils <span class="keyword">import</span> *</span><br><span class="line">logging = app_log</span><br><span class="line">logging.debug(<span class="string">&quot;当前python版本&quot;</span>+str(sys.version))</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -311,20 +318,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

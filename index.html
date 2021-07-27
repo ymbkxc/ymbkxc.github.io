@@ -157,6 +157,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/27/%E6%97%A5%E8%AF%AD%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%95%E8%AF%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/27/%E6%97%A5%E8%AF%AD%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8D%95%E8%AF%8D/" class="post-title-link" itemprop="url">日语学习之单词</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-27 09:33:13 / Modified: 09:36:16" itemprop="dateCreated datePublished" datetime="2021-07-27T09:33:13+08:00">2021-07-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E8%AF%AD/" itemprop="url" rel="index"><span itemprop="name">日语</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E8%AF%AD/%E8%AF%8D%E6%B1%87/" itemprop="url" rel="index"><span itemprop="name">词汇</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>2021-07-27</strong></p>
+<p>稲光　　　いなびかり　</p>
+<p>否めない　いなめない</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/03/Redis%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -470,7 +544,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-22 13:49:13" itemprop="dateModified" datetime="2021-04-22T13:49:13+08:00">2021-04-22</time>
+                <time title="Modified: 2021-07-19 14:46:44" itemprop="dateModified" datetime="2021-07-19T14:46:44+08:00">2021-07-19</time>
               </span>
 
           
@@ -487,6 +561,13 @@
           <p>python日志输入位置更改方式：</p>
 <p>在文件名中指定路径。filemode 模式：<strong>w：覆盖写；a:追加写</strong>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(</span><br><span class="line">    level=logging.DEBUG,</span><br><span class="line">    format=<span class="string">&quot;%(asctime)s - %(levelname)s - %(message)s&quot;</span>,</span><br><span class="line">    datefmt=<span class="string">&quot;%m/%d/%Y %H:%M:%S %p&quot;</span>,</span><br><span class="line">    filename=<span class="string">&#x27;/opt/data/xiao/push.log&#x27;</span>,</span><br><span class="line">    filemode=<span class="string">&#x27;w&#x27;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果想因为日志高频写入容量增长快，可以指定限制日志大小：</p>
+<p>编写Utils文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> logging.handlers <span class="keyword">import</span> RotatingFileHandler</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">log_formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s %(levelname)s %(funcName)s(%(lineno)d) %(message)s&#x27;</span>)</span><br><span class="line">logFile = <span class="string">&#x27;D:/BPlatform3.7.4/log/forecast.log&#x27;</span></span><br><span class="line">my_handler = RotatingFileHandler(logFile, mode=<span class="string">&#x27;a&#x27;</span>, maxBytes=<span class="number">50</span>*<span class="number">1024</span>*<span class="number">1024</span>, </span><br><span class="line">                                 backupCount=<span class="number">1000</span>, encoding=<span class="literal">None</span>, delay=<span class="number">0</span>)</span><br><span class="line">my_handler.setFormatter(log_formatter)</span><br><span class="line">my_handler.setLevel(logging.DEBUG)</span><br><span class="line">app_log = logging.getLogger(<span class="string">&#x27;root&#x27;</span>)</span><br><span class="line">app_log.setLevel(logging.DEBUG)</span><br><span class="line">app_log.addHandler(my_handler)</span><br></pre></td></tr></table></figure>
+
+<p>其中 maxBytes设置每个log文件最大内存，backupCount为最大日志数。然后在应用的py文件中导入Utils.py文件即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Utils <span class="keyword">import</span> *</span><br><span class="line">logging = app_log</span><br><span class="line">logging.debug(<span class="string">&quot;当前python版本&quot;</span>+str(sys.version))</span><br></pre></td></tr></table></figure>
 
 
       
@@ -789,91 +870,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/11/jupyter%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="六时吉祥">
-      <meta itemprop="description" content="法尚应舍，何况非法">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="六时杂谈">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/11/jupyter%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">jupyter相关知识</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-11 08:42:28" itemprop="dateCreated datePublished" datetime="2021-03-11T08:42:28+08:00">2021-03-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-28 09:52:42" itemprop="dateModified" datetime="2021-05-28T09:52:42+08:00">2021-05-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>jupyter更改端口：</strong></p>
-<p>1.打开anaconda prompt输入如下指令生成配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
-
-<p>运行完毕后此条信息有生成的配置文件路径</p>
-<p>Writing default config to: C:\Users\User.jupyter\jupyter_notebook_config.py</p>
-<p>2.打开配置文件找到：</p>
-<p>指定端口 jupyter的默认端口为8888,可以找到这一行去掉注释，更改成自己想指定的端口。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.port = 8889</span><br></pre></td></tr></table></figure>
-
-<p><strong>jupyer 配置远程登陆：</strong></p>
-<p>1.生成配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
-
-<p>2.生成密钥</p>
-<p>进入python环境：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> notebook.auth <span class="keyword">import</span> passwd</span><br><span class="line">passwd()</span><br></pre></td></tr></table></figure>
-
-<p>3.编辑配置文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.ip=<span class="string">&#x27;*&#x27;</span>                                  <span class="comment"># 设置所有ip皆可访问  </span></span><br><span class="line">c.NotebookApp.password = <span class="string">u&#x27;sha:ce...       			# 生成的密文</span></span><br><span class="line"><span class="string">c.NotebookApp.open_browser = False                  # 禁止自动打开浏览器  </span></span><br><span class="line"><span class="string">c.NotebookApp.port =8888                           #随便指定一个端口  </span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -945,20 +941,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
