@@ -28,7 +28,7 @@
 <meta property="og:description" content="统计某列元素中值的个数： 12dict(biaoqian[&amp;#x27;发现角裂支数合计&amp;#x27;].value_counts())     获取单列： 1condata.loc[:,&amp;#x27;发现角裂支数合计&amp;#x27;]  根据dataframe中某一列进行判断 并根据判断结果赋值到另一列 1condata[&amp;#x27;标签&amp;#x27;] &#x3D; condata.发现角裂支数合计.apply(l">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-14T08:13:32.000Z">
-<meta property="article:modified_time" content="2021-07-08T02:42:38.829Z">
+<meta property="article:modified_time" content="2021-07-29T01:48:08.235Z">
 <meta property="article:author" content="六时吉祥">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="知识点">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-08 10:42:38" itemprop="dateModified" datetime="2021-07-08T10:42:38+08:00">2021-07-08</time>
+                <time title="Modified: 2021-07-29 09:48:08" itemprop="dateModified" datetime="2021-07-29T09:48:08+08:00">2021-07-29</time>
               </span>
 
           
@@ -450,6 +450,16 @@
 
 <p>python将指定文件夹指定文件类型的文件名提取：</p>
 <p>python画曲线：</p>
+<p><strong>DataFrame内存优化：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce_mem_usage</span>(<span class="params">df</span>):</span></span><br><span class="line">    starttime = time.time()</span><br><span class="line">    numerics = [<span class="string">&#x27;int16&#x27;</span>, <span class="string">&#x27;int32&#x27;</span>, <span class="string">&#x27;int64&#x27;</span>, <span class="string">&#x27;float16&#x27;</span>, <span class="string">&#x27;float32&#x27;</span>, <span class="string">&#x27;float64&#x27;</span>]</span><br><span class="line">    start_mem = df.memory_usage().sum() / <span class="number">1024</span>**<span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> df.columns:</span><br><span class="line">        col_type = df[col].dtypes</span><br><span class="line">        <span class="keyword">if</span> col_type <span class="keyword">in</span> numerics:</span><br><span class="line">            c_min = df[col].min()</span><br><span class="line">            c_max = df[col].max()</span><br><span class="line">            <span class="keyword">if</span> pd.isnull(c_min) <span class="keyword">or</span> pd.isnull(c_max):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> str(col_type)[:<span class="number">3</span>] == <span class="string">&#x27;int&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.iinfo(np.int8).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int8).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int8)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int16).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int32).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int32)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int64).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int64).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int64)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.finfo(np.float16).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.finfo(np.float32).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float32)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    df[col] = df[col].astype(np.float64)</span><br><span class="line">    end_mem = df.memory_usage().sum() / <span class="number">1024</span>**<span class="number">2</span></span><br><span class="line">    print(<span class="string">&#x27;-- Mem. usage decreased to &#123;:5.2f&#125; Mb (&#123;:.1f&#125;% reduction),time spend:&#123;:2.2f&#125; min&#x27;</span>.format(end_mem,</span><br><span class="line">                                                                                                           <span class="number">100</span>*(start_mem-end_mem)/start_mem,</span><br><span class="line">                                                                                                           (time.time()-starttime)/<span class="number">60</span>))</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line">    </span><br><span class="line"> reduce_mem_usage(pd.read_csv(<span class="string">&#x27;alldata.csv&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>python多版本共存下，指定python 版本安装whl：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\AppData\Local\Programs\Python\Python37\Scripts\pip install keras_nightly-2.5.0.dev2021020900-py2.py3-none-any.whl</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -t D:\python3.5(32bit)\Lib\site-packages -i https://pypi.douban.com/simple 你要下载的东西</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -546,7 +556,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -559,7 +569,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
