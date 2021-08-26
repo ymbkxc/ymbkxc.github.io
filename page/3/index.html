@@ -157,6 +157,153 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/28/%E5%AD%A6%E4%B9%A0MongoDB%E4%B9%8BCSharp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/28/%E5%AD%A6%E4%B9%A0MongoDB%E4%B9%8BCSharp/" class="post-title-link" itemprop="url">学习MongoDB之C#</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-28 12:56:41" itemprop="dateCreated datePublished" datetime="2020-12-28T12:56:41+08:00">2020-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-12 16:55:48" itemprop="dateModified" datetime="2021-01-12T16:55:48+08:00">2021-01-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="MongoDB学习之C"><a href="#MongoDB学习之C" class="headerlink" title="MongoDB学习之C#"></a>MongoDB学习之C#</h1><p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/image-20201228130035168.png" alt="image-20201228130035168"></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>MongoDB driver 有一个特征就是当一个collection不存在的时候，就自动创建它。</p>
+<p>mongodb安装完成后的启动问题：</p>
+<p>​    因为win10 的配置方式和其他的不一样，指定目录 mongod.exe –logpath F:\mongo\log\mongodb.log –logappend –dbpath F:\mongo\data –directoryperdb –serviceName MongoDB –install</p>
+<p>如果想远程连接，需要在mongodb.cfg中修改配置</p>
+<ol>
+<li>  bindIp: 127.0.0.1,0.0.0.0</li>
+<li>bind_ip_all: true</li>
+</ol>
+<p>C#中在nuget里安装MongoDB.Driver</p>
+<h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> MongoDB.Bson;</span><br><span class="line"><span class="keyword">using</span> MongoDB.Driver;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MongoDBCSharp</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">var</span> client = <span class="keyword">new</span> MongoClient(<span class="string">&quot;mongodb://localhost:27017&quot;</span>);</span><br><span class="line">            <span class="keyword">var</span> database = client.GetDatabase(<span class="string">&quot;people&quot;</span>);</span><br><span class="line">            <span class="keyword">var</span> collection = database.GetCollection&lt;Persion&gt;(<span class="string">&quot;person&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> documents = Enumerable.Range(<span class="number">0</span>, <span class="number">1000000</span>).Select(i =&gt; <span class="keyword">new</span> Persion( i,<span class="string">&quot;a&quot;</span>));</span><br><span class="line">            collection.InsertMany(documents);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>   <span class="keyword">class</span> <span class="title">Persion</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span>  <span class="title">Persion</span>(<span class="params"><span class="keyword">int</span> m_id, <span class="keyword">string</span> m_name</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">this</span>.idcard = m_id;</span><br><span class="line">            <span class="keyword">this</span>.name = m_name;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> idcard;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">string</span> name;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>批量插入时，可以将自己定义的类的实例化list进行插入。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/24/pyecharts%E4%B8%89%E7%BB%B4%E6%95%A3%E7%82%B9%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/24/pyecharts%E4%B8%89%E7%BB%B4%E6%95%A3%E7%82%B9%E5%9B%BE/" class="post-title-link" itemprop="url">pyecharts三维散点图</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-24 14:42:05" itemprop="dateCreated datePublished" datetime="2020-12-24T14:42:05+08:00">2020-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-12 17:09:01" itemprop="dateModified" datetime="2021-01-12T17:09:01+08:00">2021-01-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="pyecharts绘制三维散点图"><a href="#pyecharts绘制三维散点图" class="headerlink" title="pyecharts绘制三维散点图"></a>pyecharts绘制三维散点图</h1><p>​        该散点图的绘制可以体现多维度的信息，其中前三列是x轴、y轴、z轴的值，之后的列对应了数据点的颜色和大小，总共可以表示5个维度。此处应用股票日线的数据，x轴为日期（catalog类型），y轴为成交量，z轴为成交总价，第四维度为收盘价、第五维度也为收盘价，收盘价越高，颜色越深，收盘价越高、点的size越大。此处并未考虑实际意义，就是为了弄明白怎样画图，各个参数的含义，这个功能的原始demo的颜色和大小分别是fiber和vitem，x、y、z轴分别是protein、fiber、sodium。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> aiohttp <span class="keyword">import</span> TCPConnector, ClientSession</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> pyecharts.options <span class="keyword">as</span> opts</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Scatter3D</span><br><span class="line"></span><br><span class="line">stock = pd.read_csv(<span class="string">&#x27;600428_all.csv&#x27;</span>)</span><br><span class="line">stock[<span class="string">&#x27;counter&#x27;</span>] = range(len(stock))</span><br><span class="line"><span class="comment">#stock[&#x27;date&#x27;]  =stock.date.apply(lambda x: x + &#x27; 15:00:00&#x27;)</span></span><br><span class="line"><span class="comment">#stock[&#x27;timestamp&#x27;] = stock.date.apply(lambda x:time.mktime(time.strptime(x, &#x27;%Y-%m-%d %H:%M:%S&#x27;)))</span></span><br><span class="line">x = stock[<span class="string">&#x27;counter&#x27;</span>]</span><br><span class="line">y = stock[<span class="string">&#x27;volume&#x27;</span>]</span><br><span class="line">z = stock[<span class="string">&#x27;close&#x27;</span>]</span><br><span class="line">min_close = z.min()</span><br><span class="line">max_close = z.max()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造数据</span></span><br><span class="line">stockdata = stock[[<span class="string">&#x27;date&#x27;</span>,<span class="string">&#x27;volume&#x27;</span>,<span class="string">&#x27;amount&#x27;</span>,<span class="string">&#x27;close&#x27;</span>,<span class="string">&#x27;close&#x27;</span>,<span class="string">&#x27;counter&#x27;</span>]]</span><br><span class="line"><span class="comment">#stockdata = stock[[&#x27;counter&#x27;,&#x27;vol&#x27;,&#x27;price&#x27;]]</span></span><br><span class="line">stockdatalist = stockdata.values.tolist()</span><br><span class="line">stockdata.head()</span><br><span class="line"></span><br><span class="line">(</span><br><span class="line">    Scatter3D(</span><br><span class="line">        init_opts=opts.InitOpts(width=<span class="string">&quot;1440px&quot;</span>, height=<span class="string">&quot;720px&quot;</span>)</span><br><span class="line">    )  <span class="comment"># bg_color=&quot;black&quot;</span></span><br><span class="line">    .add(</span><br><span class="line">        series_name=<span class="string">&quot;&quot;</span>,</span><br><span class="line">        data=stockdatalist,</span><br><span class="line">        xaxis3d_opts=opts.Axis3DOpts(</span><br><span class="line">            name=<span class="string">&#x27;date&#x27;</span>,</span><br><span class="line">            type_=<span class="string">&quot;category&quot;</span>,</span><br><span class="line">            <span class="comment"># textstyle_opts=opts.TextStyleOpts(color=&quot;#fff&quot;),</span></span><br><span class="line">        ),</span><br><span class="line">        yaxis3d_opts=opts.Axis3DOpts(</span><br><span class="line">            name=<span class="string">&#x27;volume&#x27;</span>,</span><br><span class="line">            type_=<span class="string">&quot;value&quot;</span>,</span><br><span class="line">            <span class="comment"># textstyle_opts=opts.TextStyleOpts(color=&quot;#fff&quot;),</span></span><br><span class="line">        ),</span><br><span class="line">        zaxis3d_opts=opts.Axis3DOpts(</span><br><span class="line">            name=<span class="string">&#x27;amount&#x27;</span>,</span><br><span class="line">            type_=<span class="string">&quot;value&quot;</span>,</span><br><span class="line"><span class="comment">#             min_=3,</span></span><br><span class="line"><span class="comment">#             max_=7,</span></span><br><span class="line">            <span class="comment"># textstyle_opts=opts.TextStyleOpts(color=&quot;#fff&quot;),</span></span><br><span class="line">        ),</span><br><span class="line">        grid3d_opts=opts.Grid3DOpts(width=<span class="number">100</span>, height=<span class="number">100</span>, depth=<span class="number">100</span>),</span><br><span class="line">    )</span><br><span class="line">    .set_global_opts(</span><br><span class="line">        visualmap_opts=[</span><br><span class="line"><span class="comment">#             opts.AxisOpts(</span></span><br><span class="line"><span class="comment">#                 max_interval = 3600 * 24 * 1000</span></span><br><span class="line"><span class="comment">#             ),</span></span><br><span class="line">            opts.VisualMapOpts(</span><br><span class="line">                type_=<span class="string">&quot;color&quot;</span>,</span><br><span class="line">                is_calculable=<span class="literal">True</span>,</span><br><span class="line">                dimension=<span class="number">3</span>,</span><br><span class="line"><span class="comment">#                 split_number = 10,</span></span><br><span class="line">                pos_top=<span class="string">&quot;10&quot;</span>,</span><br><span class="line">                min_=min_close+min_close*<span class="number">0.1</span>,</span><br><span class="line">                 max_=max_close-min_close*<span class="number">0.1</span>,</span><br><span class="line">                range_color=[</span><br><span class="line">                    <span class="string">&quot;#1710c0&quot;</span>,</span><br><span class="line">                     <span class="string">&quot;#0b9df0&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;#00fea8&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;#00ff0d&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;#f5f811&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;#f09a09&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;#fe0300&quot;</span>,</span><br><span class="line">                ],</span><br><span class="line">            ),</span><br><span class="line">            opts.VisualMapOpts(</span><br><span class="line">                type_=<span class="string">&quot;size&quot;</span>,</span><br><span class="line">                is_calculable=<span class="literal">True</span>,</span><br><span class="line">                dimension=<span class="number">4</span>,</span><br><span class="line">                pos_bottom=<span class="string">&quot;10&quot;</span>,</span><br><span class="line">                min_=min_close+min_close*<span class="number">0.1</span>,</span><br><span class="line">                 max_=max_close-min_close*<span class="number">0.1</span>,</span><br><span class="line">                 range_size=[min_close+min_close*<span class="number">0.1</span>, max_close-min_close*<span class="number">0.1</span>],</span><br><span class="line">                </span><br><span class="line">            ),</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">    .render(<span class="string">&quot;stock.html&quot;</span>)</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最终效果图：</p>
+<p><img src="https://gitee.com/ymrsxc/liushizatan/raw/master/image-20201224171453759.png" alt="image-20201224171453759"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/14/%E8%AE%BE%E7%BD%AEjupyterlab%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -504,7 +651,7 @@ struct ResolInput
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-25 13:24:21" itemprop="dateModified" datetime="2021-06-25T13:24:21+08:00">2021-06-25</time>
+                <time title="Modified: 2021-08-26 08:54:17" itemprop="dateModified" datetime="2021-08-26T08:54:17+08:00">2021-08-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -550,9 +697,10 @@ struct ResolInput
 <p>2021年掌握==<strong>tensorflow</strong>==工具、学习**==算法导论==<strong>、掌握一门</strong>==前端框架==**。</p>
 <h3 id="2021-04-22"><a href="#2021-04-22" class="headerlink" title="2021/04/22"></a><strong>2021/04/22</strong></h3><p>盘面资金：体现市场中资金的充裕程度。<br>$$<br>盘面资金=\frac{委买量\ast委买均价}{委卖量\ast委卖均价}\ast上证综指<br>$$</p>
 <p>委比：衡量买卖相对强弱指标。<br>$$<br>委比=\frac{委买指数-委卖指数}{委买指数+委卖指数}<br>$$</p>
-<p><strong>2021/06/03</strong></p>
-<p>六月二日追高，当时认为盘面要继续上攻，没想到连跌两天，目前的想法是，继续持有，持有时间暂定半个月。</p>
+<h3 id="2021-06-03"><a href="#2021-06-03" class="headerlink" title="2021/06/03"></a><strong>2021/06/03</strong></h3><p>六月二日追高，当时认为盘面要继续上攻，没想到连跌两天，目前的想法是，继续持有，持有时间暂定半个月。</p>
 <p>研究因子投资。</p>
+<h3 id="2021-08-25"><a href="#2021-08-25" class="headerlink" title="2021/08/25"></a><strong>2021/08/25</strong></h3><p>持股周期应该是多长？不同股票的持股周期研究。</p>
+<h3 id="2021-08-25-1"><a href="#2021-08-25-1" class="headerlink" title="2021/08/25"></a><strong>2021/08/25</strong></h3><p>目前持有三一重工、300ETF、创业板ETF。今天应该会抛掉300ETF和创业板ETF，三一重工继续持有。</p>
 
       
     </div>
@@ -838,328 +986,10 @@ struct ResolInput
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/14/python%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="六时吉祥">
-      <meta itemprop="description" content="法尚应舍，何况非法">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="六时杂谈">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/14/python%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">python操作</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-14 16:13:32" itemprop="dateCreated datePublished" datetime="2020-09-14T16:13:32+08:00">2020-09-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-29 09:48:08" itemprop="dateModified" datetime="2021-07-29T09:48:08+08:00">2021-07-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>统计某列元素中值的个数：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dict(biaoqian[<span class="string">&#x27;发现角裂支数合计&#x27;</span>].value_counts())</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
-
-<p><strong>获取单列：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">condata.loc[:,<span class="string">&#x27;发现角裂支数合计&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>根据dataframe中某一列进行判断 并根据判断结果赋值到另一列</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">condata[<span class="string">&#x27;标签&#x27;</span>] = condata.发现角裂支数合计.apply(<span class="keyword">lambda</span> x: <span class="number">1</span> <span class="keyword">if</span> pd.notna(x)  <span class="keyword">else</span> <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Dataframe 修改列名：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.rename(columns=&#123;<span class="string">&#x27;原列名&#x27;</span>：<span class="string">&#x27;新列名&#x27;</span>&#125;, inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>查找list中是否包含某元素：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L.index(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>dataframe更改列类型：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">labeltable.astype(&#123;<span class="string">&#x27;浇铸日期&#x27;</span>:<span class="string">&#x27;int&#x27;</span>&#125;).astype(&#123;<span class="string">&#x27;PONO&#x27;</span>:<span class="string">&#x27;int&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>matplotlib 画直方图：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.hist(CUSN_withcreak, label = <span class="string">&#x27;角裂&#x27;</span>,  facecolor=<span class="string">&quot;tab:pink&quot;</span>, edgecolor=<span class="string">&quot;tab:orange&quot;</span>, density=<span class="literal">True</span>, alpha = <span class="number">0.7</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>遍历series的value和index：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index = [i  <span class="keyword">for</span> i,v <span class="keyword">in</span> aa.items()]</span><br><span class="line">value =  [v  <span class="keyword">for</span> i,v <span class="keyword">in</span> aa.items()]</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>筛选非空数据</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">condata = condata[condata[<span class="string">&#x27;ST_NO&#x27;</span>].notnull()]</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>dataframe 查看各个列变量类型</strong></p>
-<p>df.dtypes</p>
-<p><strong>python 获取SQL server中文乱码解决</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="keyword">nvarchar</span>(<span class="number">100</span>),字段)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>dataframe转list</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X.values.tolist()*<span class="comment">#dataframe 转 list*</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>dataframe的时间戳转成字符串时间格式</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">format = <span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span> <span class="comment"># 根据此格式来时间戳解析为时间字符串</span></span><br><span class="line">data[<span class="string">&#x27;time_stamp&#x27;</span>].apply(<span class="keyword">lambda</span> x: datetime.datetime.fromtimestamp(x).strftime(format))</span><br><span class="line">data.reset_index(drop=<span class="literal">True</span>).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>dataframe多重索引降级</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.index = df.index.droplevel()<span class="comment"># 多重索引降级</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>打开大文本文件</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">&#x27;D:/学习/data/.txt&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    search = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">while</span> search:</span><br><span class="line">        next_n_lines=list(islice(f,<span class="number">100000</span>))</span><br><span class="line">        <span class="keyword">for</span> eachinfor <span class="keyword">in</span> next_n_lines:       </span><br><span class="line">            <span class="keyword">if</span> str(eachinfor).find(<span class="string">&#x27;&#x27;</span>)!=<span class="number">-1</span>:</span><br><span class="line">                print(eachinfor)</span><br><span class="line">                search = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> next_n_lines:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>dataframe去除索引、重新命名列名、重新组织列</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df = df.reset_index()</span><br><span class="line">df = df.rename(&#123;<span class="string">&#x27;code&#x27;</span>: <span class="string">&#x27;symbol&#x27;</span>,<span class="string">&#x27;date&#x27;</span>: <span class="string">&#x27;dt&#x27;</span>, <span class="string">&#x27;volume&#x27;</span>: <span class="string">&#x27;vol&#x27;</span>&#125;, axis=<span class="number">1</span>, inplace=<span class="literal">False</span>)</span><br><span class="line">df = df[[<span class="string">&#x27;symbol&#x27;</span>, <span class="string">&#x27;dt&#x27;</span>, <span class="string">&#x27;open&#x27;</span>, <span class="string">&#x27;close&#x27;</span>, <span class="string">&#x27;high&#x27;</span>, <span class="string">&#x27;low&#x27;</span>, <span class="string">&#x27;vol&#x27;</span>]]</span><br></pre></td></tr></table></figure>
-
-<p><strong>python查看安装包所在路径</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> qlib</span><br><span class="line"></span><br><span class="line">print(qlib.__file__)</span><br></pre></td></tr></table></figure>
-
-<p><strong>jupyter 打开指定文件夹中的ipynb文件：</strong></p>
-<p>cmd中切换到包含ipynb的目录，之后再次目录中打开jupyter lab即可。</p>
-<p><strong>dataframe调整某个列的位置：</strong></p>
-<p>可以将列拿出来，再删除掉，然后再插入指定位置：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MAT_NO = result.MAT_NO</span><br><span class="line">result = result.drop(<span class="string">&#x27;MAT_NO&#x27;</span>,axis = <span class="number">1</span>)</span><br><span class="line">result.insert(<span class="number">2</span>,<span class="string">&#x27;MAT_NO&#x27;</span>,MAT_NO)</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加到最后：</span></span><br><span class="line">result[<span class="string">&#x27;HOT_JZ_FLAG&#x27;</span>] = HOT_JZ_FLAG</span><br></pre></td></tr></table></figure>
-
-<p><strong>list生成dataframe 并去掉包含NAN的值的行:</strong></p>
-<p>注意转置问题，将列表生成字典，然后将字典转为DataFrame格式。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">formatted_date = [price[<span class="string">&#x27;formatted_date&#x27;</span>] <span class="keyword">for</span> price <span class="keyword">in</span> prices]</span><br><span class="line">adjclose = [price[<span class="string">&#x27;adjclose&#x27;</span>] <span class="keyword">for</span> price <span class="keyword">in</span> prices]</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&#x27;formatted_date&#x27;</span>:formatted_date,<span class="string">&#x27;adjclose&#x27;</span>:adjclose&#125;) </span><br><span class="line">df = df.dropna(axis=<span class="number">0</span>,how=<span class="string">&#x27;any&#x27;</span>) <span class="comment">#drop all rows that have any NaN values</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>python matplotlib 绘图 X轴文本间隔显示、设置大小、X轴坐标旋转：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">25</span>,<span class="number">25</span>))</span><br><span class="line">plt.plot(df[<span class="string">&#x27;formatted_date&#x27;</span>],df[<span class="string">&#x27;adjclose&#x27;</span>])</span><br><span class="line">plt.xticks(range(<span class="number">0</span>,len(df[<span class="string">&#x27;formatted_date&#x27;</span>]),<span class="number">6</span>))</span><br><span class="line">plt.xticks(fontproperties = <span class="string">&#x27;Times New Roman&#x27;</span> ,size = <span class="number">25</span>,rotation = <span class="number">90</span>) </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><strong>字典推导式：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取pono与其索引的dic</span></span><br><span class="line"><span class="comment">#dic：&#123;板坯号:[索引,日期]</span></span><br><span class="line">ponodic = &#123;lfdata_temper.loc[i,<span class="string">&#x27;MAT_NO&#x27;</span>]: [i,lfdata_temper.loc[i,<span class="string">&#x27;time&#x27;</span>],lfdata_temper.loc[i,<span class="string">&#x27;SLAB_CUT_TIME&#x27;</span>]] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(lfdata_temper[<span class="string">&#x27;MAT_NO&#x27;</span>])) &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>筛选时间范围：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hfdata[hfdata.time.between(<span class="string">&#x27;2021-02-24 00:12:00&#x27;</span>,<span class="string">&#x27;2021-02-24 00:12:01&#x27;</span>)]</span><br></pre></td></tr></table></figure>
-
-<p><strong>判断文件是否存在：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">my_file_hf = Path(hffile)</span><br><span class="line">my_file_hf.is_file()</span><br></pre></td></tr></table></figure>
-
-<p><strong>创建txt并追加内容：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_str_to_txt</span>(<span class="params">date,str_data</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    创建txt，并且写入</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    path_file_name = <span class="string">&#x27;./action_&#123;&#125;.txt&#x27;</span>.format(date)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(path_file_name):</span><br><span class="line">        <span class="keyword">with</span> open(path_file_name, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            print(f)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(path_file_name, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(str_data)</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除dataframe前N行或者后N行：</strong></p>
-<p><strong>利用python正则表达式删除括号：</strong></p>
-<p><strong>利用str.maketrans进行字符串指定字符删除和替换</strong></p>
-<p><strong>利用replace进行字符串指定字符删除和替换:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = text.replace(<span class="string">&#x27;(&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">text = text.replace(<span class="string">&#x27;)&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">text = text.replace(<span class="string">&#x27;linesuccess_jsonpCallback&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Series转DataFrame:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dicdf  = dict(dfallorigin[<span class="string">&#x27;ENTCOIL&#x27;</span>].value_counts())</span><br><span class="line"></span><br><span class="line">df_month = pd.DataFrame(dicdf,index=[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-<p>从已有的DataFrame中获取指定的列组合为新的DataFrame:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1=df[[<span class="string">&#x27;c1&#x27;</span>,<span class="string">&#x27;c2&#x27;</span>]]</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>matplotlib画图中文显示方块解决方案：</strong></p>
-<p>添加仿宋：FangSong</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>]=<span class="literal">False</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>] <span class="comment"># 用来正常显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span> <span class="comment"># 用来正常显示负号</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">12.0</span>, <span class="number">12.0</span>) <span class="comment"># 设置figure_size尺寸</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.interpolation&#x27;</span>] = <span class="string">&#x27;nearest&#x27;</span> <span class="comment"># 设置 interpolation style</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.cmap&#x27;</span>] = <span class="string">&#x27;gray&#x27;</span> <span class="comment"># 设置 颜色 style</span></span><br><span class="line"><span class="comment">#figsize(12.5, 4) # 设置 figsize</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;savefig.dpi&#x27;</span>] = <span class="number">80</span> <span class="comment">#图片像素</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;figure.dpi&#x27;</span>] = <span class="number">80</span> <span class="comment">#分辨率</span></span><br><span class="line">figure, ax = plt.subplots()</span><br><span class="line">item = [<span class="string">&#x27;钢种1&#x27;</span>,<span class="string">&#x27;钢种2&#x27;</span>,<span class="string">&#x27;钢种3&#x27;</span>,<span class="string">&#x27;钢种4&#x27;</span>,<span class="string">&#x27;钢种5&#x27;</span>,<span class="string">&#x27;钢种6&#x27;</span>]</span><br><span class="line">num1 = [<span class="number">713</span>, <span class="number">792</span>, <span class="number">869</span>,<span class="number">720</span>,<span class="number">698</span>,<span class="number">986</span>]</span><br><span class="line">num2 = [<span class="number">686</span>, <span class="number">867</span>, <span class="number">899</span>,<span class="number">666</span>,<span class="number">743</span>,<span class="number">326</span>] <span class="comment">#这里对数据进行了截断，所有值都减去了2，只画从2开始的部分</span></span><br><span class="line">x =list(range(len(num1))) <span class="comment">#横坐标</span></span><br><span class="line">width = <span class="number">0.4</span> <span class="comment">#每一根“柱”的宽度</span></span><br><span class="line"><span class="comment">#plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0], [2.0, 2.2, 2.4, 2.6, 2.8, 3.0])</span></span><br><span class="line"><span class="comment">#设置y坐标，实际数值是前一组，标记数值为后一组</span></span><br><span class="line">plt.bar(x, num1, width=width, label=<span class="string">&#x27;正常&#x27;</span>,fc = <span class="string">&#x27;#B0C4DE&#x27;</span>)<span class="comment">#画第一组</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    x[i] = x[i] + width <span class="comment">#横坐标移动</span></span><br><span class="line">plt.bar(x, num2, width=width, label=<span class="string">&#x27;异常&#x27;</span>,fc = <span class="string">&#x27;#4682B4&#x27;</span>)<span class="comment">#画第二组 </span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>]= [<span class="string">&#x27;KaiTi&#x27;</span>, <span class="string">&#x27;SimHei&#x27;</span>, <span class="string">&#x27;FangSong&#x27;</span>] </span><br><span class="line">y=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    y.append(x[i] - width/<span class="number">2</span>)   </span><br><span class="line">ax.set_xticks(y) <span class="comment">#令对象名称出现在相邻两&quot;柱&quot;中间位置</span></span><br><span class="line">ax.set_xticklabels(item)</span><br><span class="line"></span><br><span class="line">plt.tick_params(labelsize=<span class="number">16</span>)</span><br><span class="line">labels = ax.get_xticklabels() + ax.get_yticklabels()</span><br><span class="line">[label.set_fontname(<span class="string">&#x27;FangSong&#x27;</span>) <span class="keyword">for</span> label <span class="keyword">in</span> labels]<span class="comment">#坐标轴字体设置</span></span><br><span class="line"></span><br><span class="line">font1 = &#123;<span class="string">&#x27;family&#x27;</span> : <span class="string">&#x27;FangSong&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;weight&#x27;</span> : <span class="string">&#x27;normal&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;size&#x27;</span>   : <span class="number">16</span>,</span><br><span class="line">&#125;</span><br><span class="line">plt.legend(prop=font1)<span class="comment">#图例字体设置</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.grid(axis=<span class="string">&quot;y&quot;</span>)</span><br><span class="line"><span class="comment">#plt.xlabel(&#x27;Item&#x27;,font1)</span></span><br><span class="line">plt.ylabel(<span class="string">&#x27;数量/个&#x27;</span>,font1)</span><br><span class="line"><span class="comment">#plt.title(u&#x27;椭圆度超差&#x27;,font1)</span></span><br><span class="line">plt.savefig(<span class="string">&#x27;椭圆度超差&#x27;</span>,bbox_inches = <span class="string">&#x27;tight&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><strong>anaconda pip安装timeout解决办法：</strong></p>
-<p>在pip install pymongo 后指定源。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymongo -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com</span><br></pre></td></tr></table></figure>
-
-<p><strong>64位win10调用32位动态链接库：</strong></p>
-<p>1.安装对应版本的python（多版本同时安装，path里谁在前面调用的对应的版本）</p>
-<p><strong>python字符串中写单引号</strong>：</p>
-<p>应用转义字符：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">       &#123;&#125; <span class="keyword">as</span> 日期,</span><br><span class="line">       \<span class="string">&#x27;&#123;&#125;\&#x27;</span> <span class="keyword">as</span> 出钢记号,</span><br><span class="line">       t1.AYL_TIME <span class="keyword">as</span> 分析时间</span><br><span class="line">      ,t1.PONO  <span class="keyword">as</span> pono号</span><br><span class="line">      ,t3.过热度均值</span><br><span class="line"></span><br><span class="line">      ,t1.ELM_N_ACT*t1.ELM_ALT_ACT*<span class="number">10000</span> <span class="keyword">as</span> 氮铝积</span><br><span class="line">      ,(t1.ELM_N_ACT - t1.ELM_TI_ACT/<span class="number">3.42</span> - t1.ELM_B_ACT/<span class="number">0.77</span>)*t1.ELM_ALT_ACT*<span class="number">10000</span> <span class="keyword">as</span> 剩余氮铝积</span><br><span class="line">      ,t1.ELM_CU_ACT+ t1.ELM_SN_ACT+t1.ELM_AS_ACT <span class="keyword">as</span> 残余元素</span><br><span class="line">      ,t1.ELM_P_ACT <span class="keyword">as</span> P磷元素实绩值</span><br><span class="line">      ,t1.ELM_S_ACT <span class="keyword">as</span> S硫元素实绩值</span><br><span class="line">      ,t1.ELM_B_ACT <span class="keyword">as</span> B硼元素实绩值</span><br><span class="line">      ,t1.ELM_TI_ACT <span class="keyword">as</span> TI钛元素实绩值</span><br><span class="line">      ,t1.ELM_N_ACT <span class="keyword">as</span> N氮元素实绩值</span><br><span class="line">      ,t1.ELM_ALT_ACT <span class="keyword">as</span> AL铝元素实绩值</span><br><span class="line">      ,t4.LOOSE侧比热流</span><br><span class="line">      ,t5.FIX侧比热流</span><br><span class="line">      ,<span class="number">2.5</span>*(<span class="number">0.5</span>-(t1.ELM_C_ACT + <span class="number">0.02</span>*ELM_MN_ACT<span class="number">-0.1</span>*ELM_SI_ACT<span class="number">-0.7</span>*ELM_S_ACT)) <span class="keyword">as</span> 铁素体势FP</span><br><span class="line">      ,t6.中间包钢水量 <span class="keyword">as</span> 中间包钢水量</span><br><span class="line"><span class="keyword">from</span> [CC].[dbo].QMTQTBEBCQ1QBEQ  t1</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">JOIN</span>  <span class="comment">#tempnormal_ t2</span></span><br><span class="line"><span class="keyword">ON</span> t1.AYL_TIME=t2.AYL_TIME</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> <span class="comment">#tempnormal_1 t3</span></span><br><span class="line"><span class="keyword">ON</span> t1.PONO = t3.PONO</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> <span class="comment">#tempnormal_2 t4</span></span><br><span class="line"><span class="keyword">ON</span> t3.PONO = t4.PONO</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> <span class="comment">#tempnormal_3 t5</span></span><br><span class="line"><span class="keyword">ON</span> t4.PONO = t5.PONO</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> <span class="comment">#tempnormal_4 t6</span></span><br><span class="line"><span class="keyword">ON</span> t5.PONO = t6.制造命令号</span><br><span class="line"><span class="keyword">where</span> t1.PONO = &#123;&#125;     </span><br><span class="line"><span class="keyword">and</span> t1.AYL_TIME != <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> t1.PONO <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>python取整：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"> </span><br><span class="line">math.ceil(<span class="number">-0.5</span>)<span class="comment">#向上取整</span></span><br><span class="line">round(<span class="number">-2.5</span>)<span class="comment"># 四舍五入</span></span><br><span class="line">math.floor(<span class="number">-0.3</span>)<span class="comment">#向下取整</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>python列表中元素分别前后相加：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#列表推导</span></span><br><span class="line">data1= data[:<span class="number">1</span>] + [x+y <span class="keyword">for</span> x,y <span class="keyword">in</span> zip(data[<span class="number">1</span>:],data[:<span class="number">-1</span>])]</span><br><span class="line">data1= data[:<span class="number">1</span>] + [sum(data[x:x+<span class="number">2</span>]) <span class="keyword">for</span> x <span class="keyword">in</span> range(len(data)<span class="number">-1</span>)]</span><br><span class="line">data1= [sum(data[x<span class="number">-1</span>:x+<span class="number">1</span>]) <span class="keyword">if</span> x&gt;<span class="number">0</span> <span class="keyword">else</span> data[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,len(data))]</span><br><span class="line"></span><br><span class="line"><span class="comment">#itertools库</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> accumulate</span><br><span class="line">data1 = [v + (data[i<span class="number">-1</span>] <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span>) <span class="keyword">for</span> i, v <span class="keyword">in</span> enumerate(data)]</span><br><span class="line">print(data1)</span><br></pre></td></tr></table></figure>
-
-<p><strong>python列表中元素累计相加：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data2= [sum(data[:x]) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,len(data)+<span class="number">1</span>)]</span><br><span class="line">data2 = list(accumulate(data))</span><br></pre></td></tr></table></figure>
-
-<p><strong>python Dataframe join:</strong></p>
-<p>join 就是按照 dataframe 的index 对齐</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">concatdt = hfdatasingle.join(shapedatasingle)</span><br></pre></td></tr></table></figure>
-
-<p><strong>python DataFrame 删除前N行或后N行：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dataframe.drop(dataframe.head(n).index,inplace=<span class="literal">True</span>) <span class="comment"># 从头去掉n行</span></span><br><span class="line">dataframe.drop(dataframe.tail(n).index,inplace=<span class="literal">True</span>) <span class="comment"># 从尾部去掉n行</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>python 排序：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按照索引排序</span></span><br><span class="line">df1.sort_index(ascending=<span class="literal">False</span>)</span><br><span class="line"><span class="comment">#按照某值排序</span></span><br><span class="line">df1.sort_values(by=<span class="string">&#x27;A&#x27;</span>,ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 获取list 差、并、交集合：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="comment"># intersection</span></span><br><span class="line"><span class="number">2</span> intersection = list(set(a).intersection(set(b)))</span><br><span class="line"><span class="number">3</span> <span class="comment"># union</span></span><br><span class="line"><span class="number">4</span> union = list(set(a).union(set(b)))</span><br><span class="line"><span class="number">5</span> <span class="comment"># difference</span></span><br><span class="line"><span class="number">6</span> difference = list(set(a).difference(set(b)))</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 获取Dataframe 某行某列：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">behindcoil_dt.iat[<span class="number">0</span>,<span class="number">1</span>]<span class="comment">#取第0行，第1列</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>python 把dataframe的一列设为索引:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.set_index(<span class="string">&#x27;列名&#x27;</span>，inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>vscode 选择python 解释器：</strong></p>
-<p>右键单击选择命令面板，接着输入python:select选择 Select：Interpreter 然后进行选择。另外点击底部的python解释器也可以设置</p>
-<p><strong>python 字典排序：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sortedlendict =sorted(hotlendict.items(),key=<span class="keyword">lambda</span> kv:(kv[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
-
-<p><strong>python list 转换为带索引的字典：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hotlendict = dict(zip(hotlenlist,range(len(hotlenlist ))))</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 创建空DataFrame：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame()</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 字典 转 DataFrame:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(pd.Series(hotlenlist), columns=[<span class="string">&#x27;pos&#x27;</span>])</span><br><span class="line">            df.reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">            <span class="comment">#df = df.reset_index().rename(columns=&#123;&#x27;pos&#x27;:&#x27;id&#x27;&#125;)</span></span><br><span class="line">            df.to_csv(<span class="string">&#x27;D:/工作文件/512/可视化/hotlenlist.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 嵌套list创建DataFrame:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">steeldf = pd.DataFrame(codeclose_T,columns=incodename)</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 元组组成的列表转为字典：</strong></p>
-<p>字典排序后转换为list，其中元素为排序的键值对组成的元组</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cc = [(<span class="string">&#x27;1&#x27;</span>,<span class="number">1</span>),(<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;jiqw&#x27;</span>),(<span class="string">&#x27;3&#x27;</span>,<span class="number">1372</span>)]        </span><br><span class="line"> dict(cc)</span><br><span class="line">&#123;<span class="string">&#x27;1&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;3&#x27;</span>: <span class="number">1372</span>, <span class="string">&#x27;2&#x27;</span>: <span class="string">&#x27;jiqw&#x27;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>python 去除列表中小于某个数的值：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hotlenlist=list(filter(<span class="keyword">lambda</span> x:x&gt;=<span class="number">1</span>, hotlenlist))</span><br><span class="line"></span><br><span class="line">newnums=[i <span class="keyword">for</span> i <span class="keyword">in</span> nums <span class="keyword">if</span> i&gt;=<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>利用字典推导式筛选字典中满足条件的键值对：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">headerTable = &#123;k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> dictll.items() <span class="keyword">if</span> k &gt; <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>python下载whl：</strong></p>
-<p>可以去官方网站去下载，左侧 Release history 查找历史版本 <a target="_blank" rel="noopener" href="https://pypi.org/project/zeroc-ice/3.7.4/#files">https://pypi.org/project/zeroc-ice/3.7.4/#files</a></p>
-<p>第三方下载地址：<a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">https://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
-<p><strong>python colorbar:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">15</span>,<span class="number">4</span>)<span class="comment"># 设置 figsize</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;savefig.dpi&#x27;</span>] = <span class="number">1000</span> <span class="comment">#图片像素</span></span><br><span class="line">plt.axvline(x=<span class="number">0</span>,color=<span class="string">&#x27;b&#x27;</span>,linestyle=<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">h = plt.contourf(X,Y,zarray,cmap=<span class="string">&#x27;bwr&#x27;</span>,levels=np.linspace(<span class="number">-20</span>,<span class="number">20</span>,<span class="number">40</span>))<span class="comment">#,extend=&#x27;both&#x27;</span></span><br><span class="line">print(<span class="string">&#x27;plot contourf&#x27;</span>)</span><br><span class="line">cb  = plt.colorbar(h)</span><br><span class="line">cb.ax.tick_params(labelsize=<span class="number">8</span>)  <span class="comment">#设置色标刻度字体大小。</span></span><br><span class="line"></span><br><span class="line">cb.formatter.set_scientific(<span class="literal">True</span>)</span><br><span class="line">plt.xticks(fontsize=<span class="number">8</span>)</span><br><span class="line">plt.yticks(fontsize=<span class="number">8</span>)</span><br><span class="line">font = &#123;<span class="string">&#x27;family&#x27;</span> : <span class="string">&#x27;serif&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;color&#x27;</span>  : <span class="string">&#x27;darkred&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;weight&#x27;</span> : <span class="string">&#x27;normal&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;size&#x27;</span>   : <span class="number">8</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">tick_locator = ticker.MaxNLocator(nbins=<span class="number">10</span>)  <span class="comment"># colorbar上的刻度值个数</span></span><br><span class="line">cb.locator = tick_locator</span><br><span class="line">cb.update_ticks()</span><br><span class="line">cb.set_label(<span class="literal">None</span>,fontdict=font) <span class="comment">#设置colorbar的标签字体及其大小</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>python 统计array中满足某条件的元素个数：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">percent = np.sum(abs(CPCCylinderPos8)&gt;=<span class="number">50</span>)/len(CPCCylinderPos8)*<span class="number">100</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>python 截取字符串：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">len(filename)</span><br><span class="line">filename = filename[<span class="number">-9</span>:<span class="number">-1</span>]<span class="comment"># 左闭右开</span></span><br><span class="line">	filename = filename[<span class="number">-9</span>:]<span class="comment"># 左闭右开	</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>python 查找文件是否存在：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">existsflag = os.path.exists(value)  </span><br></pre></td></tr></table></figure>
-
-<p><strong>python 跳过异常继续运行循环：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	<span class="comment">##&#x27;有可能出现异常的代码放在这里&#x27;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line">	<span class="keyword">continue</span></span><br><span class="line"><span class="comment">##在这里写继续执行新的语句</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>python list 反转：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flatnesschannel = list(reversed(flatnesschannel))</span><br></pre></td></tr></table></figure>
-
-<p><strong>python DataFrame 按列反转：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">realchanneldt = realchanneldt.iloc[:, ::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 屏幕录制：</strong></p>
-<p>安装依赖包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python</span><br><span class="line">pip install pynput</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">python 屏幕录制改进版，无opencv黑框显示！</span></span><br><span class="line"><span class="string">@zhou 2020/1/29_</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageGrab</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> pynput <span class="keyword">import</span> keyboard</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line">flag=<span class="literal">False</span>  <span class="comment">#停止标志位</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">video_record</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    屏幕录制！</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    name = datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H-%M-%S&#x27;</span>) <span class="comment">#当前的时间</span></span><br><span class="line">    p = ImageGrab.grab()  <span class="comment"># 获得当前屏幕</span></span><br><span class="line">    a, b = p.size  <span class="comment"># 获得当前屏幕的大小</span></span><br><span class="line">    fourcc = cv2.VideoWriter_fourcc(*<span class="string">&#x27;XVID&#x27;</span>)  <span class="comment"># 编码格式</span></span><br><span class="line">    video = cv2.VideoWriter(<span class="string">&#x27;%s.avi&#x27;</span>%name, fourcc, <span class="number">20</span>, (a, b))  <span class="comment"># 输出文件命名为test.mp4,帧率为16，可以自己设置</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        im = ImageGrab.grab()</span><br><span class="line">        imm=cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)<span class="comment">#转为opencv的BGR格式</span></span><br><span class="line">        video.write(imm)</span><br><span class="line">        <span class="keyword">if</span> flag:</span><br><span class="line">            print(<span class="string">&quot;录制结束！&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    video.release()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_press</span>(<span class="params">key</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    键盘监听事件！！！</span></span><br><span class="line"><span class="string">    :param key:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#print(key)</span></span><br><span class="line">    <span class="keyword">global</span> flag</span><br><span class="line">    <span class="keyword">if</span> key == keyboard.Key.esc:</span><br><span class="line">        flag=<span class="literal">True</span></span><br><span class="line">        print(<span class="string">&quot;stop monitor！&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span>  <span class="comment">#返回False，键盘监听结束！</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    th=threading.Thread(target=video_record)</span><br><span class="line">    th.start()</span><br><span class="line">    <span class="keyword">with</span> keyboard.Listener(on_press=on_press) <span class="keyword">as</span> listener:</span><br><span class="line">        listener.join()</span><br></pre></td></tr></table></figure>
-
-<p><strong>记录程序运行时间：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">time_start = time.time()</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">your  code </span><br><span class="line"><span class="comment">#</span></span><br><span class="line">time_end = time.time()</span><br><span class="line">print(<span class="string">&#x27;totally cost&#x27;</span>,time_end - time_start)</span><br></pre></td></tr></table></figure>
-
-<p><strong>DataFrame多条件筛选：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">satisfydt_lt30 = satisfydt[((satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&lt;<span class="number">20</span>) &amp; (satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&gt;<span class="number">0</span>))  |((satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&gt;<span class="number">-20</span>) &amp;(satisfydt[<span class="string">&#x27;CPCCylinderPos8&#x27;</span>]&lt;<span class="number">0</span>))]</span><br></pre></td></tr></table></figure>
-
-<p><strong>Datarame 提取 指定列 生成字典</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># value 为list：</span></span><br><span class="line">coddic = steelindustry.groupby(<span class="string">&#x27;证券代码&#x27;</span>)[<span class="string">&#x27;证券名称&#x27;</span>,<span class="string">&#x27;中证四级名称&#x27;</span>].apply(list).to_dict()</span><br><span class="line"><span class="comment"># value 为单个值</span></span><br><span class="line">coddic =&#123;key:values <span class="keyword">for</span> key , values <span class="keyword">in</span> zip(steelindustry[<span class="string">&#x27;证券代码&#x27;</span>],steelindustry[<span class="string">&#x27;证券英文名&#x27;</span>])&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>嵌套list转置：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeclose_T = list(map(list, zip(*codeclose)))<span class="comment">#二维矩阵转置</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>sns绘制heatmap:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sns设置画布大小 放在一起运行有效</span></span><br><span class="line">matplotlib.pyplot.figure(figsize=(<span class="number">30</span>, <span class="number">16</span>))</span><br><span class="line">seaborn.heatmap(steeldf_corr, center=<span class="number">0</span>, annot=<span class="literal">True</span>,linewidths=<span class="number">0.05</span>, cmap=<span class="string">&#x27;YlGnBu&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><strong>计算两个list 相关性：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETF500close.corr(Baosteelclose)</span><br></pre></td></tr></table></figure>
-
-<p><strong>计算dataframe列相关性：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">steeldf_corr = steeldf.corr()</span><br></pre></td></tr></table></figure>
-
-<p><strong>python双循环推导式：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(x, y) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">300</span>,<span class="number">1000</span>,<span class="number">100</span>) <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">400</span>,<span class="number">1100</span>,<span class="number">100</span>) <span class="keyword">if</span> x != y]</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 列表推导式</strong>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lmargin = [ i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">300</span>,<span class="number">1000</span>,<span class="number">100</span>)]  <span class="comment"># </span></span><br><span class="line">rmargin = [ i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">400</span>,<span class="number">1100</span>,<span class="number">100</span>)]  <span class="comment"># </span></span><br><span class="line">l = [[i ,j] <span class="keyword">for</span> i, j <span class="keyword">in</span> zip(lmargin, rmargin)]  <span class="comment"># 字典推导式</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>python 安装 matplotlib:</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install --user matplotlib==2.*</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 字符串 补0：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stock_em_hsgt_stock_statistics_df[<span class="string">&#x27;股票代码&#x27;</span>] = stock_em_hsgt_stock_statistics_df[<span class="string">&#x27;股票代码&#x27;</span>].apply(<span class="keyword">lambda</span> x: str(x).zfill(<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
-
-<p><strong>python打印类实例化对象的所有属性：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(block.__dict__)</span><br></pre></td></tr></table></figure>
-
-<p><strong>python 批量下载whl包：</strong></p>
-<p>准备requirement文件：requirement.txt</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">tensorflow==2.5.0</span><br><span class="line">h5py==3.1.0</span><br><span class="line">absl-py==0.13.0</span><br><span class="line">keras-nightly==2.5.0.dev2021020900</span><br><span class="line">tensorflow-estimator==2.5.0</span><br><span class="line">opt-einsum==3.3.0</span><br><span class="line">flatbuffers==1.12</span><br><span class="line">grpcio==1.34.1</span><br><span class="line">Keras-Preprocessing==1.1.2</span><br><span class="line">tensorboard==2.5.0</span><br><span class="line">gast==0.4.0</span><br><span class="line">google-pasta==0.2.0</span><br><span class="line">astunparse==1.6.3</span><br><span class="line">cached-property==1.5.2</span><br><span class="line">tensorboard-data-server==0.6.1</span><br><span class="line">google-auth==1.32.1</span><br><span class="line">Markdown==3.3.4</span><br><span class="line">tensorboard-plugin-wit==1.8.0</span><br><span class="line">google-auth-oauthlib==0.4.4</span><br><span class="line">pyasn1-modules==0.2.8</span><br><span class="line">rsa==4.7.2</span><br><span class="line">cachetools==4.2.2</span><br><span class="line">pyasn1==0.4.8</span><br><span class="line">google==3.0.0</span><br><span class="line">protobuf==3.17.3</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip download -d tensorflow-lib -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-<p>python将指定文件夹指定文件类型的文件名提取：</p>
-<p>python画曲线：</p>
-<p><strong>DataFrame内存优化：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce_mem_usage</span>(<span class="params">df</span>):</span></span><br><span class="line">    starttime = time.time()</span><br><span class="line">    numerics = [<span class="string">&#x27;int16&#x27;</span>, <span class="string">&#x27;int32&#x27;</span>, <span class="string">&#x27;int64&#x27;</span>, <span class="string">&#x27;float16&#x27;</span>, <span class="string">&#x27;float32&#x27;</span>, <span class="string">&#x27;float64&#x27;</span>]</span><br><span class="line">    start_mem = df.memory_usage().sum() / <span class="number">1024</span>**<span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> df.columns:</span><br><span class="line">        col_type = df[col].dtypes</span><br><span class="line">        <span class="keyword">if</span> col_type <span class="keyword">in</span> numerics:</span><br><span class="line">            c_min = df[col].min()</span><br><span class="line">            c_max = df[col].max()</span><br><span class="line">            <span class="keyword">if</span> pd.isnull(c_min) <span class="keyword">or</span> pd.isnull(c_max):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> str(col_type)[:<span class="number">3</span>] == <span class="string">&#x27;int&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.iinfo(np.int8).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int8).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int8)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int16).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int32).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int32)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.iinfo(np.int64).min <span class="keyword">and</span> c_max &lt; np.iinfo(np.int64).max:</span><br><span class="line">                    df[col] = df[col].astype(np.int64)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> c_min &gt; np.finfo(np.float16).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float16).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float16)</span><br><span class="line">                <span class="keyword">elif</span> c_min &gt; np.finfo(np.float32).min <span class="keyword">and</span> c_max &lt; np.finfo(np.float32).max:</span><br><span class="line">                    df[col] = df[col].astype(np.float32)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    df[col] = df[col].astype(np.float64)</span><br><span class="line">    end_mem = df.memory_usage().sum() / <span class="number">1024</span>**<span class="number">2</span></span><br><span class="line">    print(<span class="string">&#x27;-- Mem. usage decreased to &#123;:5.2f&#125; Mb (&#123;:.1f&#125;% reduction),time spend:&#123;:2.2f&#125; min&#x27;</span>.format(end_mem,</span><br><span class="line">                                                                                                           <span class="number">100</span>*(start_mem-end_mem)/start_mem,</span><br><span class="line">                                                                                                           (time.time()-starttime)/<span class="number">60</span>))</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line">    </span><br><span class="line"> reduce_mem_usage(pd.read_csv(<span class="string">&#x27;alldata.csv&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>python多版本共存下，指定python 版本安装whl：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\AppData\Local\Programs\Python\Python37\Scripts\pip install keras_nightly-2.5.0.dev2021020900-py2.py3-none-any.whl</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -t D:\python3.5(32bit)\Lib\site-packages -i https://pypi.douban.com/simple 你要下载的东西</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1227,20 +1057,20 @@ struct ResolInput
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
