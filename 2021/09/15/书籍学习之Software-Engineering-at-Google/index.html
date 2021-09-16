@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="第一章 什么是软件工程?Nothing is built on stone; all is built on sand, but we must build as if the sand were stone.   —Jorge Luis Borges 我们看到编程和软件工程之间的三个关键区别:时间、规模和权衡。在软件工程项目中，工程师需要更多地关注时间的流逝和最终的变更需求。在软件工程组织中，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="书籍学习之Software_Engineering_at_Google">
+<meta property="og:url" content="http://example.com/2021/09/15/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0%E4%B9%8BSoftware-Engineering-at-Google/index.html">
+<meta property="og:site_name" content="六时杂谈">
+<meta property="og:description" content="第一章 什么是软件工程?Nothing is built on stone; all is built on sand, but we must build as if the sand were stone.   —Jorge Luis Borges 我们看到编程和软件工程之间的三个关键区别:时间、规模和权衡。在软件工程项目中，工程师需要更多地关注时间的流逝和最终的变更需求。在软件工程组织中，我">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-15T00:57:02.000Z">
+<meta property="article:modified_time" content="2021-09-15T02:22:05.792Z">
+<meta property="article:author" content="六时吉祥">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="书籍学习">
+<meta property="article:tag" content="Software_Engineering_at_Google">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/09/15/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0%E4%B9%8BSoftware-Engineering-at-Google/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>书籍学习之Software_Engineering_at_Google | 六时杂谈</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">六时杂谈</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0%E4%B9%8BSoftware-Engineering-at-Google/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          书籍学习之Software_Engineering_at_Google
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-15 08:57:02 / Modified: 10:22:05" itemprop="dateCreated datePublished" datetime="2021-09-15T08:57:02+08:00">2021-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">工程实践</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">书籍学习</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0/Software-Engineering-at-Google/" itemprop="url" rel="index"><span itemprop="name">Software_Engineering_at_Google</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="第一章-什么是软件工程"><a href="#第一章-什么是软件工程" class="headerlink" title="第一章 什么是软件工程?"></a>第一章 什么是软件工程?</h1><p><font size=4 face="Times New Roman">Nothing is built on stone; all is built on sand, but we must build as if the sand were stone.</font></p>
+<p><font size=4 face="Times New Roman">  —Jorge Luis Borges</font></p>
+<p>我们看到编程和软件工程之间的三个关键区别:时间、规模和权衡。在软件工程项目中，工程师需要更多地关注时间的流逝和最终的变更需求。在软件工程组织中，我们需要更加关注规模和效率，无论是对于我们生产的软件，还是对于生产它的组织。最后，作为软件工程师，我们被要求做出更复杂的决策，这些决策往往基于对时间和成长的不精确估计。</p>
+<p>在谷歌中，我们有时会说，“软件工程是随着时间的推移而集成的编程。”编程当然是软件工程的一个重要部分:毕竟，编程是您生成新软件的首要方式。如果你接受这种区别，那么我们可能需要划分编程任务(开发)和软件工程任务(开发、修改、维护)。时间的增加为编程增加了一个重要的新维度。立方体不是正方形，距离不是速度。软件工程不是编程。</p>
+<p>了解时间对编程的影响的一种方法是思考这个问题，“你的代码的预期寿命是多少?”</p>
+<p>考虑需要持续几分钟的代码和想象可以存活几十年的代码一样合理。一般来说，较短的代码不受时间的影响。对于一个实用程序，您不太可能需要适应底层库、操作系统(OS)、硬件或语言版本的新版本，而该程序的实用程序只需要一个小时。这些寿命较短的系统实际上“只是”一个编程问题。就像一个立方体在一维中被压缩得足够远，它就是一个正方形。当我们延长时间以延长寿命时，改变就变得更加重要。在十多年的时间里，大多数程序所依赖的（依赖关系，服务，管理？），无论是隐式的还是显式的，都可能发生变化。</p>
+<p>这种区别是我们所说的软件可持续性的核心。您的项目是可持续的，如果在您的软件的预期生命周期内，您能够对任何有价值的变化作出反应，无论是出于技术或业务原因。重要的是，我们只寻找性能—您可能会因为缺乏价值或其他优先级而选择不执行给定的升级。（<font size=4 face="Times New Roman">Importantly, we are looking only for capability—you might choose not to perform a<br>given upgrade, either for lack of value or other priorities.</font>）当你根本无法对潜在技术或产品方向的变化做出反应时，你就是在押下高风险的赌注，希望这种变化永远不会变得至关重要(这种变化会迫使你对产品进行重构，修改大量代码？)。对于短期项目来说，这可能是一个安全的赌注。几十年后，可能就不是这样了。</p>
+<p>另一种看待软件工程的方法是考虑规模。有多少人参与其中?随着时间的推移，它们在开发和维护中扮演什么角色?编程任务通常是个人创造的行为，但软件工程任务是团队努力的结果。早期定义软件工程的尝试为这个观点提供了一个很好的定义:“多版本程序的多人开发。”这表明软件工程和编程之间的区别在于时间和人。团队合作也许暴露新的问题，但也比任何单一的项目人员更有潜力以产生有价值的系统。团队组织、项目组成，以及软件项目的政策和实践都是软件工程复杂性的主要方面。这些问题是规模所固有的:随着组织的成长和项目的扩展，它在生产软件方面是否变得更有效率?随着我们的成长（grow 增长？），我们的开发工作流程是否变得更有效率？或者我们的版本控制策略和测试策略会让我们付出更多的成本?从软件工程的早期开始，人们就开始讨论沟通和人员规模问题，可以追溯到<font size=4 face="Times New Roman">（Mythical Man Month）</font>这种规模问题通常是政策的关键，也是软件可持续性问题的基础:我们需要重复做的事情需要多少成本?</p>
+<p>我们也可以说，软件工程与编程的不同之处在于需要做出的决策的复杂性和风险。在软件工程中，我们经常被迫评估几种路径之间的权衡，有时风险很高，通常价值指标不完美。软件工程师或软件工程领导者的工作是为组织、产品和开发工作流程的可持续性和管理组织、产品和开发工作流程的规模成本。记住这些输入，评估你的权衡，做出理性的决定。我们有时可能会推迟维护更改，或者甚至接受伸缩性不好的政策，因为我们知道我们需要重新审视这些决策。关于递延成本的这些选择应该是显式和明确的。</p>
+<p>软件工程中很少有一刀切的解决方案，这本书也是如此。对于“这个软件的寿命有多长”这个问题，给出100,000的合理答案，“您的组织中有多少工程师”的范围可能是1万，以及谁也说不清楚到底需要多少的“您的项目有多少计算资源可用”。谷歌的经验可能和你的不一样。在这本书中，我们的目标是展示我们在软件的构建和维护方面发现的对我们有用的东西，我们希望在成千上万的工程师和全球范围的计算资源支持下，这些软件能够持续使用几十年。我们发现，在这种规模下，大多数实践都是必要的，也适用于较小的努力:这是一份关于工程生态系统的报告，我们认为当你扩大规模时，它会很好。在一些地方，超大规模的scale是有成本的，我们希望不用支付额外的管理费用。我们把这些（）调出来作为警告。如果您的组织发展得足够大，可以担心这些成本，那么您可能会找到更好的答案。</p>
+<p>在我们讨论团队合作、文化、政策和工具的细节之前，让我们首先对时间、规模和权衡这些主要主题进行详细的评估。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+              <a href="/tags/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0/" rel="tag"># 书籍学习</a>
+              <a href="/tags/Software-Engineering-at-Google/" rel="tag"># Software_Engineering_at_Google</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/26/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0%E4%B9%8BJavaScript-The-Definitive-Guide/" rel="prev" title="书籍学习之JavaScript-The-Definitive-Guide">
+      <i class="fa fa-chevron-left"></i> 书籍学习之JavaScript-The-Definitive-Guide
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">第一章 什么是软件工程?</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="六时吉祥"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">六时吉祥</p>
+  <div class="site-description" itemprop="description">法尚应舍，何况非法</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">六时吉祥</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

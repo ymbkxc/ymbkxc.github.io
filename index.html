@@ -157,6 +157,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0%E4%B9%8BSoftware-Engineering-at-Google/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="六时吉祥">
+      <meta itemprop="description" content="法尚应舍，何况非法">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六时杂谈">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/15/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0%E4%B9%8BSoftware-Engineering-at-Google/" class="post-title-link" itemprop="url">书籍学习之Software_Engineering_at_Google</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-15 08:57:02 / Modified: 10:22:05" itemprop="dateCreated datePublished" datetime="2021-09-15T08:57:02+08:00">2021-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">工程实践</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">书籍学习</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0/Software-Engineering-at-Google/" itemprop="url" rel="index"><span itemprop="name">Software_Engineering_at_Google</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="第一章-什么是软件工程"><a href="#第一章-什么是软件工程" class="headerlink" title="第一章 什么是软件工程?"></a>第一章 什么是软件工程?</h1><p><font size=4 face="Times New Roman">Nothing is built on stone; all is built on sand, but we must build as if the sand were stone.</font></p>
+<p><font size=4 face="Times New Roman">  —Jorge Luis Borges</font></p>
+<p>我们看到编程和软件工程之间的三个关键区别:时间、规模和权衡。在软件工程项目中，工程师需要更多地关注时间的流逝和最终的变更需求。在软件工程组织中，我们需要更加关注规模和效率，无论是对于我们生产的软件，还是对于生产它的组织。最后，作为软件工程师，我们被要求做出更复杂的决策，这些决策往往基于对时间和成长的不精确估计。</p>
+<p>在谷歌中，我们有时会说，“软件工程是随着时间的推移而集成的编程。”编程当然是软件工程的一个重要部分:毕竟，编程是您生成新软件的首要方式。如果你接受这种区别，那么我们可能需要划分编程任务(开发)和软件工程任务(开发、修改、维护)。时间的增加为编程增加了一个重要的新维度。立方体不是正方形，距离不是速度。软件工程不是编程。</p>
+<p>了解时间对编程的影响的一种方法是思考这个问题，“你的代码的预期寿命是多少?”</p>
+<p>考虑需要持续几分钟的代码和想象可以存活几十年的代码一样合理。一般来说，较短的代码不受时间的影响。对于一个实用程序，您不太可能需要适应底层库、操作系统(OS)、硬件或语言版本的新版本，而该程序的实用程序只需要一个小时。这些寿命较短的系统实际上“只是”一个编程问题。就像一个立方体在一维中被压缩得足够远，它就是一个正方形。当我们延长时间以延长寿命时，改变就变得更加重要。在十多年的时间里，大多数程序所依赖的（依赖关系，服务，管理？），无论是隐式的还是显式的，都可能发生变化。</p>
+<p>这种区别是我们所说的软件可持续性的核心。您的项目是可持续的，如果在您的软件的预期生命周期内，您能够对任何有价值的变化作出反应，无论是出于技术或业务原因。重要的是，我们只寻找性能—您可能会因为缺乏价值或其他优先级而选择不执行给定的升级。（<font size=4 face="Times New Roman">Importantly, we are looking only for capability—you might choose not to perform a<br>given upgrade, either for lack of value or other priorities.</font>）当你根本无法对潜在技术或产品方向的变化做出反应时，你就是在押下高风险的赌注，希望这种变化永远不会变得至关重要(这种变化会迫使你对产品进行重构，修改大量代码？)。对于短期项目来说，这可能是一个安全的赌注。几十年后，可能就不是这样了。</p>
+<p>另一种看待软件工程的方法是考虑规模。有多少人参与其中?随着时间的推移，它们在开发和维护中扮演什么角色?编程任务通常是个人创造的行为，但软件工程任务是团队努力的结果。早期定义软件工程的尝试为这个观点提供了一个很好的定义:“多版本程序的多人开发。”这表明软件工程和编程之间的区别在于时间和人。团队合作也许暴露新的问题，但也比任何单一的项目人员更有潜力以产生有价值的系统。团队组织、项目组成，以及软件项目的政策和实践都是软件工程复杂性的主要方面。这些问题是规模所固有的:随着组织的成长和项目的扩展，它在生产软件方面是否变得更有效率?随着我们的成长（grow 增长？），我们的开发工作流程是否变得更有效率？或者我们的版本控制策略和测试策略会让我们付出更多的成本?从软件工程的早期开始，人们就开始讨论沟通和人员规模问题，可以追溯到<font size=4 face="Times New Roman">（Mythical Man Month）</font>这种规模问题通常是政策的关键，也是软件可持续性问题的基础:我们需要重复做的事情需要多少成本?</p>
+<p>我们也可以说，软件工程与编程的不同之处在于需要做出的决策的复杂性和风险。在软件工程中，我们经常被迫评估几种路径之间的权衡，有时风险很高，通常价值指标不完美。软件工程师或软件工程领导者的工作是为组织、产品和开发工作流程的可持续性和管理组织、产品和开发工作流程的规模成本。记住这些输入，评估你的权衡，做出理性的决定。我们有时可能会推迟维护更改，或者甚至接受伸缩性不好的政策，因为我们知道我们需要重新审视这些决策。关于递延成本的这些选择应该是显式和明确的。</p>
+<p>软件工程中很少有一刀切的解决方案，这本书也是如此。对于“这个软件的寿命有多长”这个问题，给出100,000的合理答案，“您的组织中有多少工程师”的范围可能是1万，以及谁也说不清楚到底需要多少的“您的项目有多少计算资源可用”。谷歌的经验可能和你的不一样。在这本书中，我们的目标是展示我们在软件的构建和维护方面发现的对我们有用的东西，我们希望在成千上万的工程师和全球范围的计算资源支持下，这些软件能够持续使用几十年。我们发现，在这种规模下，大多数实践都是必要的，也适用于较小的努力:这是一份关于工程生态系统的报告，我们认为当你扩大规模时，它会很好。在一些地方，超大规模的scale是有成本的，我们希望不用支付额外的管理费用。我们把这些（）调出来作为警告。如果您的组织发展得足够大，可以担心这些成本，那么您可能会找到更好的答案。</p>
+<p>在我们讨论团队合作、文化、政策和工具的细节之前，让我们首先对时间、规模和权衡这些主要主题进行详细的评估。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/26/%E4%B9%A6%E7%B1%8D%E5%AD%A6%E4%B9%A0%E4%B9%8BJavaScript-The-Definitive-Guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -180,10 +270,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-08-26 09:37:05 / Modified: 09:45:27" itemprop="dateCreated datePublished" datetime="2021-08-26T09:37:05+08:00">2021-08-26</time>
+              <time title="Created: 2021-08-26 09:37:05" itemprop="dateCreated datePublished" datetime="2021-08-26T09:37:05+08:00">2021-08-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-13 16:05:16" itemprop="dateModified" datetime="2021-09-13T16:05:16+08:00">2021-09-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -218,64 +314,87 @@
 
       
           <h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="3-10-变量声明和赋值"><a href="#3-10-变量声明和赋值" class="headerlink" title="3.10 变量声明和赋值"></a>3.10 变量声明和赋值</h3><p>计算机程序的一项最基本的技术是应用名称，或者标识符，来代表值。将名称和值进行绑定</p>
+<h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><p>本章记录JavaScript表达式和用于构建这些表达式的操作符。Javascript语言的表达式可以被执行从而产生值。常量是一种非常简单的表达式。变量名同样也是一种简单的表达式，可以将任何值都赋予它。复杂表达式由简单表达式构建。例如数组访问表达式（待翻译）。与之相似，函数调用表达式由计算结果为函数对象的表达式和零个或者多个附加的用来当作函数参数的表达式组成。</p>
+<p>用简单表达式构建复杂表达式的最常见方法是使用操作符。操作符以某种方式组合其操作对象(通常是两个)，并计算出一个新值，例如乘法运算符。为了简单起见，我们有时说操作符返回一个值，而不是“计算”一个值。本章记录了所有的JavaScript操作符，并解释了不使用操作符的表达式(如数组索引和函数调用)。如果你已经知道另一种使用c风格语法的编程语言，你会发现大多数JavaScript的表达式和操作符已经很熟悉了。</p>
+<h3 id="4-2-对象和数组初始化"><a href="#4-2-对象和数组初始化" class="headerlink" title="4.2 对象和数组初始化"></a>4.2 对象和数组初始化</h3><p>对象和数组初始化是通过表达式创建新的类和数组。这些初始化表达式有时被称为对象字面量和数组字面量，然而，与真正的字面量不同，它们不是主表达式，因为它们包括许多指定属性和元素值的子表达式。数组初始化器的语法稍微简单一点，我们将从它们开始。数组初始化式是包含在方括号内的逗号分隔的表达式列表。数组初始化式的值是一个新创建的数组，这个新数组的元素被初始化为逗号分隔的表达式的值。数组初始化式中的元素表达式本身可以是数组初始化式，这意味着这些表达式可以创建嵌套数组。每次对数组初始化式求值时，都会对数组初始化式中的元素表达式求值。这意味着数组初始化表达式的值可能在每次求值时都不同。只要省略逗号之间的值，就可以将未定义的元素包含在数组字面量中。例如，下面的数组包含5个元素，其中包括3个未定义元素:：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sparseArray=[<span class="number">1</span>,,,,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<p><font size=4 face="Times New Roman">A single trailing comma is allowed after the last expression in an array initializer and does not create an undefined element. However, any array access expression for an index after that of the last expression will necessarily evaluate to undefined.</font></p>
+<p>允许在数组初始化式的最后一个表达式后面加一个逗号，这样不会创建未定义的元素。但是，对于最后一个表达式之后的索引的任何数组访问表达式都必须计算为undefined。</p>
+<p>对象初始化表达式类似于数组初始化表达式，但方括号被花括号取代，每个子表达式都以属性名和冒号作为前缀:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = &#123;<span class="attr">x</span>:<span class="number">2.3</span>,<span class="attr">y</span>:<span class="number">-1.2</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> q = &#123;&#125;;</span><br><span class="line">q.x =<span class="number">2.3</span>;p.y=<span class="number">-1.2</span>;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<p>在ES6中，对象字面量有一个功能更丰富的语法(你可以在§6.10中找到细节)。对象字面量可以嵌套。例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rectangle =&#123;</span><br><span class="line">	upperLeft:&#123;<span class="attr">x</span>:<span class="number">2</span>,<span class="attr">y</span>:<span class="number">2</span>&#125;,</span><br><span class="line">    lowerRight:&#123;<span class="attr">x</span>:<span class="number">4</span>,<span class="attr">y</span>:<span class="number">5</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/26/Guide/">
+<p>我们将在第6章和第7章再次看到对象和数组初始化器。</p>
+<h3 id="4-3函数定义表达式"><a href="#4-3函数定义表达式" class="headerlink" title="4.3函数定义表达式"></a>4.3函数定义表达式</h3><p>函数定义表达式定义一个JavaScript函数，该表达式的值就是新定义的函数。在某种意义上，函数定义表达式是“函数字面量”，就像对象初始化式是“对象字面量”一样。函数定义表达式通常由关键字function和用逗号分隔的列表组成，列表中包含零个或多个标识符(参数名)，括号中是JavaScript代码块(函数体)。例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> square = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="keyword">return</span> x*x&#125;;</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="六时吉祥">
-      <meta itemprop="description" content="法尚应舍，何况非法">
-    </span>
+<p><font size=4 face="Times New Roman">A function definition expression can also include a name for the function. Functions can also be defined using a function statement rather than a function expression. And in ES6 and later, function expressions can use a compact new “arrow function” syntax. Complete details on function definition are in Chapter 8.</font></p>
+<p>函数定义表达式还可以包含函数。函数也可以使用函数语句而不是函数表达式来定义。在ES6及后续版本中，函数表达式可以使用紧凑的新“箭头函数”语法。函数定义的完整细节在第8章。</p>
+<h3 id="4-4属性访问表达式"><a href="#4-4属性访问表达式" class="headerlink" title="4.4属性访问表达式"></a>4.4属性访问表达式</h3><p>属性访问表达式的计算结果为对象属性或数组元素的值。JavaScript为属性访问定义了两种语法:</p>
+<p>expression . identifier<br>        expression [ expression ]</p>
+<p>第一种类型的属性访问是一个表达式，后面跟着句点和标识符。表达式指定对象，标识符指定所需属性的名称。第二种类型的属性访问在第一个表达式(对象或数组)后面加上方括号中的另一个表达式。第二个表达式指定所需属性的名称或所需数组元素的索引。下面是一些具体的例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> o = &#123;<span class="attr">x</span>:<span class="number">1</span>,<span class="attr">y</span>:&#123;<span class="attr">z</span>:<span class="number">3</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">let</span> a = [o,<span class="number">4</span>,[<span class="number">5</span>,<span class="number">6</span>]];</span><br><span class="line">o.x</span><br><span class="line">o.y.z</span><br><span class="line">o.y</span><br><span class="line">o[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">a[<span class="number">1</span>]</span><br><span class="line">a[<span class="number">2</span>][<span class="string">&quot;1&quot;</span>]</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="六时杂谈">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/26/Guide/" class="post-title-link" itemprop="url">Guide</a>
-        </h2>
+<p><font size=4 face="Times New Roman">With either type of property access expression, the expression before<br>the . or [ is first evaluated. If the value is null or undefined, the<br>expression throws a TypeError, since these are the two JavaScript<br>values that cannot have properties. If the object expression is followed<br>by a dot and an identifier, the value of the property named by that<br>identifier is looked up and becomes the overall value of the expression.<br>If the object expression is followed by another expression in square<br>brackets, that second expression is evaluated and converted to a string.<br>The overall value of the expression is then the value of the property<br>named by that string. In either case, if the named property does not<br>exist, then the value of the property access expression is <strong>undefined</strong>.</font></p>
+<p>对于任意类型的属性访问表达式，在 . 或者 [ 之前的表达式是首先被计算的（evaluated）。如果值为null或undefined，则表达式抛出TypeError，因为这两个JavaScript值没有属性。如果对象表达式后面跟着一个点和一个标识符，则查找由该标识符命名的属性的值，并成为表达式的整体值。如果对象表达式后面跟着方括号中的另一个表达式，则计算第二个表达式并将其转换为字符串。表达式的整体值是由该字符串命名的属性的值。在这两种情况下，如果指定的属性不存在，那么属性访问表达式的值是未定义的。</p>
+<p>.identifier语法是两个属性访问选项中比较简单的一个，但是请注意，只有当您想要访问的属性的名称是合法的标识符，并且在编写程序时知道名称时，才能使用它。如果属性名包含空格或标点符号，或者当它是数字(用于数组)时，必须使用方括号表示法。当属性名不是静态的，但本身是计算的结果时(参见§6.3.1中的例子)，也可以使用方括号。</p>
+<p>对象及其属性将在第6章详细介绍，数组及其元素将在第7章详细介绍。</p>
+<h3 id="4-5调用表达式"><a href="#4-5调用表达式" class="headerlink" title="4.5调用表达式"></a>4.5调用表达式</h3><p>调用表达式是JavaScript用于调用(或执行)函数或方法的语法。它从标识要调用的函数的函数表达式开始。函数表达式后面跟着一个开括号，一个由0个或多个参数表达式组成的逗号分隔列表，以及一个闭括号。一些例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">Math</span>.max(x,y,z)</span><br><span class="line">a.sort()</span><br></pre></td></tr></table></figure>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+<p>当对调用表达式求值时，首先对函数表达式求值，然后对参数表达式求值以生成参数值列表。如果函数表达式的值不是函数，则抛出TypeError。接下来，按顺序将实参值赋给定义函数时指定的形参名称，然后执行函数体。如果函数使用return语句返回一个值，那么该值将成为调用表达式的值。否则，调用表达式的值是未定义的。关于函数调用的完整细节，包括当实参表达式的数量与函数定义中的形参数量不匹配时会发生什么情况的解释，见第8章。</p>
+<p>每一次函数调用包含一对括号，和在左括号之前的一个表达式。如果该表达式是属性访问表达式，则调用称为方法调用。在执行函数体时，作为属性访问主题的对象或数组将成为this关键字的值这使面向对象编程模式成为可能，其中函数(我们称之为当以这种方式使用“方法”时)对它们所属的对象进行操作。详见第9章。</p>
+<h4 id="4-5-1条件调用"><a href="#4-5-1条件调用" class="headerlink" title="4.5.1条件调用"></a>4.5.1条件调用</h4><p><strong>==?.()  跳过 后续再学==</strong></p>
+<p>在ES2020中，你也可以使用?.()来代替()来调用函数。通常在调用函数时，如果括号左边的表达式为空或未定义或任何其他非函数，则使用TypeError抛出。</p>
+<p>数组对象有一个sort()方法，可以向该方法传递一个函数参数，该参数定义数组元素所需的排序顺序。在ES2020之前，如果你想编写一个像sort()这样的方法，它接受一个可选的函数参数，你通常会使用if语句来检查函数参数在调用if函数体之前是否已经定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">square</span>(<span class="params">x,log</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(log)&#123;</span><br><span class="line">        log(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-              <time title="Created: 2021-08-26 09:35:15" itemprop="dateCreated datePublished" datetime="2021-08-26T09:35:15+08:00">2021-08-26</time>
-            </span>
+<p>然而，使用ES2020的这种条件调用语法，你可以使用?.()简单地编写函数调用，知道只有在实际有一个值需要调用时才会发生调用:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">square</span>(<span class="params">x,log</span>)</span>&#123;</span><br><span class="line">    log?.(x);</span><br><span class="line">    <span class="keyword">return</span> x*x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          
+<h3 id="4-6对象创建表达式"><a href="#4-6对象创建表达式" class="headerlink" title="4.6对象创建表达式"></a>4.6对象创建表达式</h3><p>对象创建表达式创建一个新对象并调用一个函数(称为构造函数)来初始化该对象的属性。对象创建表达式与调用表达式相似，只是它们以关键字new作为前缀:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line"><span class="keyword">new</span> Point(<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 
-        </div>
-      </header>
+<p>如果在对象创建表达式中没有向构造函数传递参数，则可以省略空括号:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Object</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span></span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+<p>对象创建表达式的值是新创建的对象。构造函数在第9章有更详细的解释。</p>
+<h3 id="4-7操作概述"><a href="#4-7操作概述" class="headerlink" title="4.7操作概述"></a>4.7操作概述</h3><p>操作符用于JavaScript的算术表达式、比较表达式、逻辑表达式、赋值表达式等等。表4-1(此处略)总结了操作要点，方便参考。</p>
+<p>注意，大多数操作符都是用标点符号表示的，比如+和=。然而，有些是用关键字表示的，比如delete和instanceof。关键字操作符是常规操作符，就像那些用标点符号表示的操作符一样;它们只是语法不够简洁。</p>
+<h4 id="4-7-1操作数"><a href="#4-7-1操作数" class="headerlink" title="4.7.1操作数"></a>4.7.1操作数</h4><p>操作符可以根据它们所期望的操作数(它们的元数)进行分类。大多数JavaScript操作符，如*乘法操作符，都是将两个表达式组合成一个更复杂的表达式的二元操作符。也就是说，它们需要两个操作数。JavaScript还支持许多一元运算符，它们将一个表达式转换为一个更复杂的表达式。表达式−x中的−运算符是一元运算符，对操作数x执行求反运算。最后，JavaScript支持一个三元操作符，即条件操作符?:，它将三个表达式组合成一个表达式。</p>
+<h4 id="4-7-2操作数和结果类型"><a href="#4-7-2操作数和结果类型" class="headerlink" title="4.7.2操作数和结果类型"></a>4.7.2操作数和结果类型</h4><p>有些操作符处理任何类型的值，但大多数操作符期望其操作数是特定类型的，而且大多数操作符返回(或求值为)特定类型的值。表4-1中的Types列指定了操作符的操作数类型(箭头前面)和结果类型(箭头后面)。JavaScript操作符通常会根据需要转换操作数的类型(参见§3.9)。乘法运算符*需要num操作数，但是表达式”3” * “5”是合法的，因为JavaScript可以将操作数转换为数字。当然，这个表达式的值是数字15，而不是字符串“15”。还要记住，每个JavaScript值不是“真”就是“假”，因此，期望布尔操作数的操作符将适用于任何类型的操作数。</p>
+<p>有些操作符的行为取决于它们所使用的操作数的类型。最值得注意的是，+操作符添加数字操作数，但连接字符串操作数。类似地，像&lt;这样的比较操作符根据操作数的类型以数字或字母顺序执行比较。各个操作符的描述解释了它们的类型依赖关系，并指定了它们执行的类型转换。请注意，表4-1中列出的赋值操作符和其他一些操作符要求的操作数类型为lval。左值（<font size=4 face="Times New Roman">lvalue</font >）是一个历史术语，意思是“可以合法地出现在赋值表达式左侧的表达式”。在JavaScript中，变量、对象属性和数组元素都是左值。</p>
+<h4 id="4-7-3-Operator-Side-Effects"><a href="#4-7-3-Operator-Side-Effects" class="headerlink" title="4.7.3 Operator Side Effects"></a>4.7.3 Operator Side Effects</h4><p>计算像2 * 3这样的简单表达式永远不会影响程序的状态，程序将来执行的任何计算都不会受到该计算的影响。但是，有些表达式有副作用，对它们的评价可能会影响以后的评价结果。赋值操作符是最明显的例子:如果你给一个变量或属性赋值，它会改变使用该变量或属性的任何表达式的值。++和–自增操作符和自减操作符相似，因为它们执行隐式赋值。delete操作符也有副作用:删除一个属性就像(但不等同于)将undefined赋给属性。其他的操作符没有副作用（<font size=4 face="Times New Roman">No other JavaScript operators have side effects</font >）但是，如果函数或构造函数体中使用的任何操作符有副作用，那么函数调用和对象创建表达式也会有副作用。</p>
+<h4 id="4-7-4运算符优先级"><a href="#4-7-4运算符优先级" class="headerlink" title="4.7.4运算符优先级"></a>4.7.4运算符优先级</h4><p>表4-1中的操作符按照优先级高到低的顺序排列，同优先级的操作符以横线分隔。操作符优先级控制操作执行的顺序。优先级较高(接近表的顶部)的操作符在优先级较低(接近表的底部)的操作符之前执行。乘法运算符*的优先级高于加法运算符+，因此乘法在加法之前执行。此外，赋值操作符=的优先级最低，因此在右侧的所有操作完成后才执行赋值操作。运算符优先级可以通过显式使用括号来重写。注意，属性访问和调用表达式的优先级高于表4-1中列出的任何操作符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> my.functions[x](y)</span><br></pre></td></tr></table></figure>
 
-      
-          
+<p>尽管typeof是最高优先级的操作符之一，但typeof操作是对属性访问、数组索引和函数调用的结果执行的，这些操作符的优先级都高于操作符。</p>
+<p>在实践中，如果您完全不确定操作符的优先级，最简单的方法是使用括号使求值顺序显式。重要的规则是:乘法和除法在加减之前执行，赋值的优先级很低，几乎总是最后执行。</p>
+<p>当新的操作符添加到JavaScript时，它们并不总是自然地适合这种优先模式。? ?操作符(§4.13.2)在表中显示为比||和&amp;&amp;的优先级低，但实际上，它相对于这些操作符的优先级没有定义，如果混合使用??用| |和&amp; &amp;,ES2020要求您明确使用括号。类似地，新的**求幂运算符相对于一元求幂运算符没有良好定义的优先级，在将求幂与求反组合时必须使用括号。</p>
+<h4 id="4-7-5算子结合性"><a href="#4-7-5算子结合性" class="headerlink" title="4.7.5算子结合性"></a>4.7.5算子结合性</h4><p>在表4-1中，标记为A的列表示运算符的结合性。L的值表示从左到右的结合律，R的值表示从右到左的结合律。运算符的结合性指定了执行相同优先级的操作的顺序。从左到右的结合性意味着操作是从左到右执行的。例如，减法运算符具有从左到右的结合性,因此：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w = x - y - z;</span><br></pre></td></tr></table></figure>
+
+<p>与</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w = ((x - y) - z);</span><br></pre></td></tr></table></figure>
+
+<p>是相同的。</p>
+<p>另一方面，下面的表达式:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y = a ** b ** c;</span><br><span class="line">x = ~-y;</span><br><span class="line">w = x = y = z;</span><br><span class="line">q = a?b:c?d:e?f:g;</span><br></pre></td></tr></table></figure>
+
+<p>与</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y &#x3D; (a ** (b ** c));</span><br><span class="line">x &#x3D; ~(-y);</span><br><span class="line">w &#x3D; (x &#x3D; (y &#x3D; z));</span><br><span class="line">q &#x3D; a?b:(c?d:(e?f:g));</span><br></pre></td></tr></table></figure>
+
+<p>是相同的。</p>
+<p>因为取幂、一元、赋值和三元条件运算符具有从右到左的结合性。</p>
+<h4 id="4-7-6-求值顺序"><a href="#4-7-6-求值顺序" class="headerlink" title="4.7.6 求值顺序"></a>4.7.6 求值顺序</h4><p>运算符优先级和结合性指定了在复杂表达式中执行操作的顺序，但它们没有指定子表达式的求值顺序。JavaScript总是严格按照从左到右的顺序计算表达式。例如，在表达式w = x + y * z中，子表达式w首先计算，然后是x、y和z。然后将y和z的值相乘，加到x的值上，并赋值给表达式w指定的变量或属性。向表达式添加括号可以改变乘法、加法和赋值的相对顺序，但不会改变求值的从左到右顺序。只有在任何一个被求值的表达式有影响另一个表达式值的副作用时，求值顺序才有影响。如果表达式x使表达式z所使用的变量递增，那么x在z之前求值的事实是重要的。</p>
+<h3 id="4-8算术表达式"><a href="#4-8算术表达式" class="headerlink" title="4.8算术表达式"></a>4.8算术表达式</h3><p>本节介绍对其操作数执行算术或其他数值操作的操作符。求幂、乘、除和减的运算很简单并且首先被覆盖。加法运算符有自己的分段，因为它还可以执行字符串连接，并且有一些不寻常的类型转换规则。一元运算符和位运算符也将在各自的小节中介绍。</p>
+<p>大多数这些算术运算符(除了下面提到的)都可以与BigInt(参见§3.2.5)操作数一起使用，或者与正则数字一起使用，只要你不混合这两种类型。基本的算术运算符是*<strong>**<em>(求幂)、</em>(乘法)，/(除法)，%(取模:除后余数)，+(加法)和-(减法)。如前所述，我们将在它自己的一节中讨论+操作符。其他五个基本运算符只是计算它们的操作数，必要时将值转换为数字，然后计算幂、积、商、余或差。不能转换为数字的非数字操作数转换为NaN值。如果其中一个操作数是(或转换为)NaN，操作的结果(几乎总是)是NaN。</strong>操作符的优先级高于<em>、/和%(它们的优先级又高于+和-)。与其他操作符不同的是，**<strong><strong>从右到左工作，所以2**</strong></strong>2**<strong><strong>3与2**</strong></strong>8相同，而不是4**<strong><strong>3。像-3**</strong></strong>2这样的表达有一种自然的歧义。根据一元减法和取幂的相对优先级，该表达式可能表示(-3)<strong>**</strong>2或-(3******2)。</em>：*不同的语言处理这个问题的方式不同，JavaScript没有选择立场，在这种情况下，省略括号只是一个语法错误，迫使您编写一个明确的表达式。**<strong><strong>是JavaScript的最新算法操作符:它被添加到ES2016语言中的。然而，Math.pow()函数从JavaScript的最早版本开始就可用了，它执行与**</strong></strong>操作符完全相同的操作。</p>
+<p>/操作符将其第一个操作数除以第二个操作数。如果您习惯于区分整数和浮点数的编程语言，那么当您将一个整数除以另一个整数时，您可能希望得到一个整数结果。然而，在JavaScript中，所有的数字都是浮点数，所以所有的除法操作都有浮点结果:5/2等于2.5，不是2。除以0将得到正无穷或负无穷，而0/0将得到NaN:这两种情况都不会引发错误。%运算符计算第一个操作数对第二个操作数取模。换句话说，它返回第一个操作数被第二个操作数整除后的余数。结果的符号与第一个操作数的符号相同。例如，5% 2等于1和-5 % 2的值为-1。</p>
+<p>虽然模运算符通常用于整数操作数，但它也适用于浮点值。例如，6.5% 2.1等于0.2。</p>
+
       
     </div>
 
@@ -1045,13 +1164,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
