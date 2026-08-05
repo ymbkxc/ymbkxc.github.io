@@ -13,4 +13,5 @@ fi
 hexo new "$1"
 echo ""
 echo "==> 已创建文章: source/_posts/$1.md"
+echo "==> 已创建图片文件夹: source/_posts/$1/  (用 Typora 粘贴图片会自动存这里)"
 echo "==> 编辑该文件写入正文后，运行 ./deploy.sh 发布"
