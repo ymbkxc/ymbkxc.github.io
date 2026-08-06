@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="860" viewBox="0 0 1400 860">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; font-size: 34px; font-weight: 700; fill: #111827; }
+      .sub { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; font-size: 18px; fill: #4b5563; }
+      .label { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; font-size: 19px; font-weight: 700; fill: #111827; }
+      .text { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; font-size: 16px; fill: #374151; }
+      .small { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; font-size: 14px; fill: #6b7280; }
+      .line { stroke: #9ca3af; stroke-width: 4; stroke-linecap: round; }
+      .tick { stroke: #6b7280; stroke-width: 2; }
+      .card { fill: #f9fafb; stroke: #d1d5db; stroke-width: 1.5; rx: 18; }
+      .card-risk { fill: #fff7ed; stroke: #fb923c; stroke-width: 2; rx: 18; }
+      .card-stop { fill: #fef2f2; stroke: #ef4444; stroke-width: 2; rx: 18; }
+      .dot { stroke: white; stroke-width: 4; }
+      .dot-normal { fill: #2563eb; }
+      .dot-risk { fill: #f97316; }
+      .dot-stop { fill: #dc2626; }
+      .section { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; font-size: 15px; font-weight: 700; fill: #ffffff; }
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="860"/>
+  <text x="70" y="70" class="title">标毅线测试复盘时间线</text>
+  <text x="70" y="104" class="sub">2026-08-02｜04:17-10:33｜14.63 km｜累计爬升 1032 m｜实际结束：林海亭</text>
+
+  <line x1="120" y1="160" x2="1280" y2="160" class="line"/>
+
+  <g transform="translate(120,160)">
+    <circle r="12" class="dot dot-normal"/>
+    <line y1="-22" y2="22" class="tick"/>
+    <rect x="-80" y="44" width="190" height="98" class="card"/>
+    <text x="-62" y="75" class="label">04:17 出发</text>
+    <text x="-62" y="103" class="text">凌晨低温阶段</text>
+    <text x="-62" y="128" class="small">早期热压力较低</text>
+  </g>
+
+  <g transform="translate(285,160)">
+    <circle r="12" class="dot dot-risk"/>
+    <line y1="-22" y2="22" class="tick"/>
+    <rect x="-95" y="-142" width="220" height="108" class="card-risk"/>
+    <text x="-76" y="-109" class="label">05:04-05:19</text>
+    <text x="-76" y="-80" class="text">2.00-3.00 km</text>
+    <text x="-76" y="-55" class="small">早期心肺高压</text>
+  </g>
+
+  <g transform="translate(410,160)">
+    <circle r="12" class="dot dot-risk"/>
+    <line y1="-22" y2="22" class="tick"/>
+    <rect x="-92" y="44" width="220" height="112" class="card-risk"/>
+    <text x="-72" y="76" class="label">05:50-06:04</text>
+    <text x="-72" y="104" class="text">4.50-5.00 km</text>
+    <text x="-72" y="130" class="small">高心率低速度</text>
+  </g>
+
+  <g transform="translate(560,160)">
+    <circle r="12" class="dot dot-risk"/>
+    <line y1="-22" y2="22" class="tick"/>
+    <rect x="-95" y="-142" width="240" height="108" class="card-risk"/>
+    <text x="-74" y="-109" class="label">06:10-06:38</text>
+    <text x="-74" y="-80" class="text">5.50-6.50 km</text>
+    <text x="-74" y="-55" class="small">坡度切换、节奏变碎</text>
+  </g>
+
+  <g transform="translate(780,160)">
+    <circle r="14" class="dot dot-stop"/>
+    <line y1="-26" y2="26" class="tick"/>
+    <rect x="-130" y="44" width="330" height="128" class="card-stop"/>
+    <text x="-106" y="78" class="label">06:59-08:18</text>
+    <text x="-106" y="107" class="text">7.51-9.50 km</text>
+    <text x="-106" y="133" class="small">最长综合困难段</text>
+    <text x="-106" y="157" class="small">抽筋、临时使用液体盐丸</text>
+  </g>
+
+  <g transform="translate(970,160)">
+    <circle r="12" class="dot dot-risk"/>
+    <line y1="-22" y2="22" class="tick"/>
+    <rect x="-105" y="-142" width="250" height="108" class="card-risk"/>
+    <text x="-82" y="-109" class="label">07:47 最高点</text>
+    <text x="-82" y="-80" class="text">8.71 km 附近</text>
+    <text x="-82" y="-55" class="small">速度、停顿、心率异常</text>
+  </g>
+
+  <g transform="translate(1110,160)">
+    <circle r="14" class="dot dot-stop"/>
+    <line y1="-26" y2="26" class="tick"/>
+    <rect x="-135" y="44" width="330" height="128" class="card-stop"/>
+    <text x="-110" y="78" class="label">09:18-10:04</text>
+    <text x="-110" y="107" class="text">12.51-13.99 km</text>
+    <text x="-110" y="133" class="small">持续陡降困难段</text>
+    <text x="-110" y="157" class="small">缺水、脚趾顶脚、技术下降叠加</text>
+  </g>
+
+  <g transform="translate(1280,160)">
+    <circle r="12" class="dot dot-normal"/>
+    <line y1="-22" y2="22" class="tick"/>
+    <rect x="-190" y="-142" width="240" height="108" class="card"/>
+    <text x="-168" y="-109" class="label">10:33 林海亭结束</text>
+    <text x="-168" y="-80" class="text">14.63 km</text>
+    <text x="-168" y="-55" class="small">合理止损，不是硬撑失败</text>
+  </g>
+
+  <rect x="70" y="390" width="1260" height="390" rx="24" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="105" y="438" class="label">复盘主线</text>
+  <text x="105" y="480" class="text">1. 前半程并不是轻松启动：最高心率很早出现，说明储备消耗提前开始。</text>
+  <text x="105" y="520" class="text">2. 7.51-9.50 km 是 FIT 盲判的最长综合困难段，主观抽筋与数据异常吻合。</text>
+  <text x="105" y="560" class="text">3. 12.51-13.99 km 是下降压力最集中的区间，陡降、低速、心率未完全回落。</text>
+  <text x="105" y="600" class="text">4. 真正限制不是单一体能，而是睡眠不足、补给断档、热环境、下坡技术、脚趾顶脚共同叠加。</text>
+  <text x="105" y="640" class="text">5. 下次策略：起步减负但不能缺水；把补水点前置规划；长下坡前检查水量、鞋带和脚趾状态。</text>
+  <text x="105" y="700" class="small">注：本图为复盘时间线，不替代 ECharts 交互数据图；困难段排序依据 FIT 盲判结果。</text>
+</svg>
