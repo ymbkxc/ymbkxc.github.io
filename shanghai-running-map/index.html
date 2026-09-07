@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="从上海长滩冠东苑到上海国际时尚中心的跑步路线交互地图">
+  <title>上海跑步路线交互地图</title>
+  <link rel="preconnect" href="https://tiles.openfreemap.org">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <div id="map" aria-label="上海跑步路线交互地图"></div>
+
+    <section class="info-card" aria-label="路线信息">
+      <div class="eyebrow">上海·滨江长距离</div>
+      <h1>冠东苑 <span>→</span> 国棉十七厂</h1>
+      <div class="goal-row">
+        <span>跑步目标距离</span>
+        <strong>约 20 km</strong>
+      </div>
+      <div class="calculation-note">目标为计划值；下方为当前绘制路线的实时计算值。</div>
+
+      <div class="metrics" aria-live="polite">
+        <div><span>第一跑步段</span><strong id="first-distance">—</strong></div>
+        <div><span>第二跑步段</span><strong id="second-distance">—</strong></div>
+        <div class="metric-total"><span>跑步累计</span><strong id="run-distance">—</strong></div>
+        <div><span>地铁空间距离</span><strong id="metro-distance">—</strong></div>
+        <div><span>整体空间路径</span><strong id="overall-distance">—</strong></div>
+      </div>
+
+      <p class="route-note">淞滨路 → 长江南路乘坐地铁 3 号线，避开吴淞大桥和逸仙高架下方。第二段不进入黄兴公园改造区，也不沿军工路、周家嘴路施工段长距离跑。</p>
+
+      <div class="legend" aria-label="图例">
+        <span><i class="legend-line run"></i>跑步段</span>
+        <span><i class="legend-line metro"></i>地铁 3 号线</span>
+      </div>
+
+      <div class="gpx-downloads" aria-label="Garmin GPX 下载">
+        <a href="第一段_冠东苑到淞滨路.gpx" download>下载第一段 GPX</a>
+        <a href="第二段_长江南路到国际时尚中心.gpx" download>下载第二段 GPX</a>
+      </div>
+    </section>
+
+    <nav class="map-controls" aria-label="地图视图控制">
+      <div class="control-title">路线视图</div>
+      <button type="button" data-fit="all">全路线</button>
+      <button type="button" data-fit="after-metro">长江南路以后</button>
+      <button type="button" data-fit="after-park-west">黄兴公园西侧以后</button>
+      <div class="control-separator"></div>
+      <button type="button" id="toggle-markers" aria-pressed="true">隐藏节点</button>
+      <button type="button" id="toggle-notes" aria-pressed="true">隐藏路线说明</button>
+    </nav>
+
+    <div id="map-status" class="map-status" role="alert" hidden></div>
+  </main>
+
+  <script>
+    window.mapLibraryFailed = function () {
+      const status = document.getElementById('map-status');
+      status.hidden = false;
+      status.textContent = '地图组件加载失败。请确认设备已连接互联网，然后刷新页面。';
+    };
+  </script>
+  <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js" onerror="window.mapLibraryFailed()"></script>
+  <script src="route-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
