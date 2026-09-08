@@ -35,6 +35,7 @@
       <div class="legend" aria-label="图例">
         <span><i class="legend-line run"></i>跑步段</span>
         <span><i class="legend-line metro"></i>地铁 3 号线</span>
+        <span><i class="legend-line actual"></i>2026-09-07 实际轨迹</span>
       </div>
 
       <div class="gpx-downloads" aria-label="Garmin GPX 下载">
@@ -51,7 +52,36 @@
       <div class="control-separator"></div>
       <button type="button" id="toggle-markers" aria-pressed="true">隐藏节点</button>
       <button type="button" id="toggle-notes" aria-pressed="true">隐藏路线说明</button>
+      <button type="button" id="toggle-activity" aria-pressed="true">隐藏实跑数据</button>
     </nav>
+
+    <section id="activity-panel" class="activity-panel" aria-label="实际跑步数据">
+      <header class="activity-header">
+        <div>
+          <div class="eyebrow">2026-09-07 · Garmin GPX</div>
+          <h2>规划路线 vs 实际跑步</h2>
+        </div>
+        <div class="comparison-distance"><span>实跑估算</span><strong id="actual-distance">—</strong></div>
+      </header>
+
+      <div class="activity-metrics" aria-live="polite">
+        <div><span>第一段</span><strong id="actual-first-distance">—</strong></div>
+        <div><span>第二段</span><strong id="actual-second-distance">—</strong></div>
+        <div><span>有效跑动</span><strong id="actual-moving-time">—</strong></div>
+        <div><span>平均配速</span><strong id="actual-average-pace">—</strong></div>
+        <div><span>平均 / 最高心率</span><strong id="actual-heart-rate">—</strong></div>
+      </div>
+
+      <div class="chart-toolbar" aria-label="训练指标图表">
+        <button type="button" data-chart="heartRate" aria-pressed="true">心率</button>
+        <button type="button" data-chart="pace" aria-pressed="false">配速</button>
+        <button type="button" data-chart="elevation" aria-pressed="false">海拔</button>
+        <button type="button" data-chart="cadence" aria-pressed="false">步频</button>
+        <span id="chart-readout" class="chart-readout">沿图表移动可查看对应地图位置</span>
+      </div>
+      <svg id="activity-chart" class="activity-chart" viewBox="0 0 760 150" role="img" aria-label="实际跑步心率曲线"></svg>
+      <p id="activity-method" class="activity-method"></p>
+    </section>
 
     <div id="map-status" class="map-status" role="alert" hidden></div>
   </main>
@@ -65,6 +95,7 @@
   </script>
   <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js" onerror="window.mapLibraryFailed()"></script>
   <script src="route-data.js"></script>
+  <script src="actual-activity-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

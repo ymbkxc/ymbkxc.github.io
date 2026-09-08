@@ -78,6 +78,33 @@ function updateDistances() {
   });
 }
 
+function formatDuration(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = Math.round(totalSeconds % 60);
+  return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+function formatPace(minutesPerKm) {
+  const totalSeconds = Math.round(minutesPerKm * 60);
+  return `${Math.floor(totalSeconds / 60)}:${String(totalSeconds % 60).padStart(2, '0')} /km`;
+}
+
+function updateActualSummary() {
+  const values = {
+    'actual-distance': `${actualActivity.movingDistanceKm.toFixed(2)} km`,
+    'actual-first-distance': `${actualActivity.sectionStats[0].distanceKm.toFixed(2)} km`,
+    'actual-second-distance': `${actualActivity.sectionStats[1].distanceKm.toFixed(2)} km`,
+    'actual-moving-time': formatDuration(actualActivity.movingSeconds),
+    'actual-average-pace': formatPace(actualActivity.averagePace),
+    'actual-heart-rate': `${actualActivity.averageHeartRate} / ${actualActivity.maxHeartRate} bpm`
+  };
+  Object.entries(values).forEach(([id, value]) => {
+    document.getElementById(id).textContent = value;
+  });
+  document.getElementById('activity-method').textContent = actualActivity.method;
+}
+
 function lineFeature(coordinates, properties = {}) {
   return { type: 'Feature', properties, geometry: { type: 'LineString', coordinates } };
 }
@@ -141,6 +168,32 @@ function addRouteLayers(map) {
     paint: { 'line-color': '#159455', 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 3, 15, 5.5], 'line-opacity': 0.82 }
   });
 
+  map.addSource('actual-running-route', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: actualActivity.routeSegments.map((coordinates, index) =>
+        lineFeature(coordinates, { section: index + 1, name: actualActivity.name })
+      )
+    }
+  });
+
+  map.addLayer({
+    id: 'actual-route-casing',
+    type: 'line',
+    source: 'actual-running-route',
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 4.5, 15, 8], 'line-opacity': 0.9 }
+  });
+
+  map.addLayer({
+    id: 'actual-route',
+    type: 'line',
+    source: 'actual-running-route',
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#e75d27', 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 2.5, 15, 4.5], 'line-opacity': 0.9 }
+  });
+
   map.addSource('metro-route', {
     type: 'geojson',
     data: lineFeature(metroRoute, { name: '地铁 3 号线' })
@@ -161,6 +214,134 @@ function addRouteLayers(map) {
     layout: { 'line-cap': 'butt', 'line-join': 'round' },
     paint: { 'line-color': '#1677d2', 'line-width': 4, 'line-opacity': 0.9, 'line-dasharray': [2, 2] }
   });
+}
+
+function createSvgElement(name, attributes = {}) {
+  const element = document.createElementNS('http://www.w3.org/2000/svg', name);
+  Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+  return element;
+}
+
+function bindActivityPanel(map) {
+  const panel = document.getElementById('activity-panel');
+  const svg = document.getElementById('activity-chart');
+  const readout = document.getElementById('chart-readout');
+  const toggle = document.getElementById('toggle-activity');
+  const markerElement = document.createElement('div');
+  markerElement.className = 'activity-location-marker';
+  markerElement.hidden = true;
+  const locationMarker = new maplibregl.Marker({ element: markerElement, anchor: 'center' })
+    .setLngLat([actualActivity.samples[0][6], actualActivity.samples[0][7]])
+    .addTo(map);
+
+  const chartDefinitions = {
+    heartRate: { index: 2, label: '心率', unit: 'bpm', format: (value) => `${Math.round(value)} bpm` },
+    pace: { index: 3, label: '配速', unit: 'min/km', format: formatPace, filter: (value) => value >= 3 && value <= 12 },
+    elevation: { index: 4, label: '海拔', unit: 'm', format: (value) => `${value.toFixed(1)} m` },
+    cadence: { index: 5, label: '步频', unit: 'spm', format: (value) => `${Math.round(value)} spm`, filter: (value) => value >= 100 && value <= 230 }
+  };
+
+  function drawChart(metricKey) {
+    const definition = chartDefinitions[metricKey];
+    const samples = actualActivity.samples.filter((sample) => {
+      const value = sample[definition.index];
+      return Number.isFinite(value) && (!definition.filter || definition.filter(value));
+    });
+    const width = 760;
+    const height = 150;
+    const padding = { left: 47, right: 16, top: 12, bottom: 25 };
+    const plotWidth = width - padding.left - padding.right;
+    const plotHeight = height - padding.top - padding.bottom;
+    const xMax = actualActivity.movingDistanceKm;
+    const values = samples.map((sample) => sample[definition.index]);
+    const rawMin = Math.min(...values);
+    const rawMax = Math.max(...values);
+    const rangePadding = Math.max((rawMax - rawMin) * 0.1, metricKey === 'heartRate' ? 4 : 0.5);
+    const yMin = rawMin - rangePadding;
+    const yMax = rawMax + rangePadding;
+    const xFor = (distance) => padding.left + distance / xMax * plotWidth;
+    const yFor = (value) => padding.top + (yMax - value) / (yMax - yMin) * plotHeight;
+    const linePath = samples.map((sample, index) => `${index ? 'L' : 'M'}${xFor(sample[0]).toFixed(2)},${yFor(sample[definition.index]).toFixed(2)}`).join(' ');
+    const areaPath = `${linePath} L${xFor(samples[samples.length - 1][0]).toFixed(2)},${padding.top + plotHeight} L${xFor(samples[0][0]).toFixed(2)},${padding.top + plotHeight} Z`;
+
+    svg.replaceChildren();
+    svg.setAttribute('aria-label', `${definition.label}随距离变化曲线`);
+    for (let index = 0; index <= 4; index += 1) {
+      const x = padding.left + plotWidth * index / 4;
+      svg.appendChild(createSvgElement('line', { x1: x, y1: padding.top, x2: x, y2: padding.top + plotHeight, class: 'chart-grid' }));
+      const label = createSvgElement('text', { x, y: height - 7, 'text-anchor': index === 0 ? 'start' : index === 4 ? 'end' : 'middle' });
+      label.textContent = `${(xMax * index / 4).toFixed(1)} km`;
+      svg.appendChild(label);
+    }
+    for (let index = 0; index <= 2; index += 1) {
+      const value = yMax - (yMax - yMin) * index / 2;
+      const y = padding.top + plotHeight * index / 2;
+      svg.appendChild(createSvgElement('line', { x1: padding.left, y1: y, x2: padding.left + plotWidth, y2: y, class: 'chart-grid' }));
+      const label = createSvgElement('text', { x: padding.left - 7, y: y + 3, 'text-anchor': 'end' });
+      label.textContent = metricKey === 'pace' ? formatPace(value).replace(' /km', '') : Math.round(value);
+      svg.appendChild(label);
+    }
+    svg.appendChild(createSvgElement('path', { d: areaPath, class: 'chart-area' }));
+    svg.appendChild(createSvgElement('path', { d: linePath, class: 'chart-line' }));
+
+    const guide = createSvgElement('line', { y1: padding.top, y2: padding.top + plotHeight, class: 'chart-guide', visibility: 'hidden' });
+    const point = createSvgElement('circle', { r: 4, class: 'chart-point', visibility: 'hidden' });
+    const hit = createSvgElement('rect', { x: padding.left, y: padding.top, width: plotWidth, height: plotHeight, class: 'chart-hit' });
+    svg.append(guide, point, hit);
+
+    function selectSample(event) {
+      const bounds = svg.getBoundingClientRect();
+      const svgX = (event.clientX - bounds.left) / bounds.width * width;
+      const targetDistance = Math.max(0, Math.min(xMax, (svgX - padding.left) / plotWidth * xMax));
+      let low = 0;
+      let high = samples.length - 1;
+      while (low < high) {
+        const middle = Math.floor((low + high) / 2);
+        if (samples[middle][0] < targetDistance) low = middle + 1;
+        else high = middle;
+      }
+      const sample = samples[Math.max(0, Math.min(samples.length - 1, low))];
+      const x = xFor(sample[0]);
+      const y = yFor(sample[definition.index]);
+      guide.setAttribute('x1', x);
+      guide.setAttribute('x2', x);
+      guide.setAttribute('visibility', 'visible');
+      point.setAttribute('cx', x);
+      point.setAttribute('cy', y);
+      point.setAttribute('visibility', 'visible');
+      readout.textContent = `${sample[0].toFixed(2)} km · ${definition.label} ${definition.format(sample[definition.index])} · 第 ${sample[8]} 段`;
+      locationMarker.setLngLat([sample[6], sample[7]]);
+      markerElement.hidden = false;
+    }
+
+    hit.addEventListener('pointermove', selectSample);
+    hit.addEventListener('pointerdown', selectSample);
+    hit.addEventListener('pointerleave', () => {
+      guide.setAttribute('visibility', 'hidden');
+      point.setAttribute('visibility', 'hidden');
+      markerElement.hidden = true;
+      readout.textContent = '沿图表移动可查看对应地图位置';
+    });
+  }
+
+  document.querySelectorAll('[data-chart]').forEach((button) => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('[data-chart]').forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
+      drawChart(button.dataset.chart);
+    });
+  });
+
+  let visible = true;
+  toggle.addEventListener('click', () => {
+    visible = !visible;
+    panel.hidden = !visible;
+    ['actual-route', 'actual-route-casing'].forEach((layerId) => map.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none'));
+    markerElement.hidden = true;
+    toggle.setAttribute('aria-pressed', String(visible));
+    toggle.textContent = visible ? '隐藏实跑数据' : '显示实跑数据';
+  });
+
+  drawChart('heartRate');
 }
 
 function safeText(value) {
@@ -207,8 +388,8 @@ function addMarkers(map) {
 function bindControls(map, markerGroups) {
   const parkWestIndex = closestRouteIndex(secondRunRoute, [121.519111, 31.302704]);
   const viewRoutes = {
-    all: [firstRunRoute, metroRoute, secondRunRoute],
-    'after-metro': [secondRunRoute],
+    all: [firstRunRoute, metroRoute, secondRunRoute, ...actualActivity.routeSegments],
+    'after-metro': [secondRunRoute, actualActivity.routeSegments[1]],
     'after-park-west': [secondRunRoute.slice(parkWestIndex)]
   };
 
@@ -239,6 +420,7 @@ function bindControls(map, markerGroups) {
 
 async function initializeMap() {
   updateDistances();
+  updateActualSummary();
 
   if (!window.maplibregl) {
     showError('地图组件加载失败。请确认设备已连接互联网，然后刷新页面。');
@@ -278,7 +460,8 @@ async function initializeMap() {
       addRouteLayers(map);
       const markers = addMarkers(map);
       bindControls(map, markers);
-      map.fitBounds(boundsFor([firstRunRoute, metroRoute, secondRunRoute]), { padding: 66, duration: 0, maxZoom: 13.1 });
+      bindActivityPanel(map);
+      map.fitBounds(boundsFor([firstRunRoute, metroRoute, secondRunRoute, ...actualActivity.routeSegments]), { padding: 66, duration: 0, maxZoom: 13.1 });
     });
 
     map.on('error', (event) => {
