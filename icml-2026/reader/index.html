@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ICML 2026 论文题目与摘要中英对照阅读器">
+  <title>ICML 2026 · 双语论文阅读器</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2230'/%3E%3Cpath d='M16 18h14v30H16zm18-6h14v36H34z' fill='%23d6ff4b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <script src="vendor/katex/katex.min.js"></script>
+  <script src="vendor/katex/auto-render.min.js"></script>
+  <script src="math-format.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="返回论文列表顶部"><span class="mark">26</span><span>ICML 双语阅读</span></a>
+    <div class="stats"><span id="paperCount">—</span> 篇论文 <span class="dot">·</span> 官方摘要快照</div>
+    <a class="source-link" href="https://icml.cc/virtual/2026/papers.html" target="_blank" rel="noreferrer">ICML 原页</a>
+    <a class="source-link" href="/icml-2026/">题目索引</a>
+  </header>
+
+  <main class="workspace">
+    <aside class="library" aria-label="论文列表">
+      <div class="search-wrap">
+        <label for="search">搜索题目、作者、机构或主题</label>
+        <input id="search" type="search" placeholder="例如：reasoning / 推理" autocomplete="off">
+      </div>
+      <div class="list-meta"><span id="resultCount">载入中…</span><button id="clearSearch" type="button" hidden>清除</button></div>
+      <p id="translationProgress" class="translation-progress" aria-live="polite"></p>
+      <div id="paperList" class="paper-list" role="listbox" aria-label="论文搜索结果"></div>
+      <nav class="pagination" aria-label="论文列表分页"><button id="prevPage" type="button">上一页</button><span id="pageLabel"></span><button id="nextPage" type="button">下一页</button></nav>
+    </aside>
+
+    <article class="reader" id="reader">
+      <div id="emptyState" class="empty-state">
+        <div class="empty-kicker">ICML 2026</div>
+        <h1>选一篇论文，开始双语阅读</h1>
+        <p>点击任一句子，英文与中文会同步高亮。你也可以用键盘的 ↑ ↓ 在论文列表中移动。</p>
+      </div>
+      <div id="paperView" hidden>
+        <p class="translation-notice">题目和摘要为 AI 辅助的非官方译文，已做完整性检查与抽查，未逐篇人工精校；可能存在误译，请以官方原文为准。原文权利归相应权利人。</p>
+        <div class="paper-head">
+          <div class="eyebrow"><span id="paperType"></span><span id="paperTopic"></span></div>
+          <div class="title-grid">
+            <h1 id="titleEn" lang="en"></h1>
+            <h1 id="titleZh" lang="zh-CN"></h1>
+          </div>
+          <section class="author-section" aria-label="作者与机构">
+            <h2>作者与机构</h2>
+            <p class="author-note">按会议数据中的作者顺序列出。机构取自会议作者资料，未逐篇核对论文署名单位；空缺不作推测。</p>
+            <ol id="authorList" class="author-list"></ol>
+          </section>
+          <div class="paper-links"><a id="icmlLink" target="_blank" rel="noreferrer">ICML 页面</a><a id="openreviewLink" target="_blank" rel="noreferrer">OpenReview</a></div>
+        </div>
+        <div class="column-labels" aria-hidden="true"><span>ENGLISH · ABSTRACT</span><span>中文 · 摘要</span></div>
+        <div id="sentencePairs" class="sentence-pairs"></div>
+      </div>
+    </article>
+  </main>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
