@@ -77,6 +77,15 @@ tag_map:
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
 meta_generator: true
 
+# Search engine discovery
+sitemap:
+  path: sitemap.xml
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
@@ -108,3 +117,4 @@ deploy:
   type: git
   repo: https://github.com/ymbkxc/ymbkxc.github.io.git
   branch: hexosub
+
